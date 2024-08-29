@@ -26,6 +26,7 @@ class EmployeeManager(BaseUserManager):
 class Employee(AbstractUser):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    position = models.CharField(max_length=20, null=True, blank= True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15)
     job_title = models.CharField(max_length=255)
@@ -61,7 +62,7 @@ class Profile(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=255)
-    employee = models.ForeignKey(Employee, related_name='group')
+    employee = models.ForeignKey(Employee, related_name='group', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
