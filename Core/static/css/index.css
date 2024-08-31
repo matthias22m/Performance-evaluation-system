@@ -48,6 +48,7 @@
 .navbar-nav {
     list-style-type: none;
     display: flex;
+   
     margin-top:-30px;
     margin-right: 50px;
     margin-left:240px;
@@ -56,12 +57,14 @@
 
 .navbar-nav li {
     margin-left: 1rem;
+
 }
 
 .navbar-nav a {
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
+    
     border-radius: 4px;
 }
 
@@ -88,3 +91,4 @@
     margin-left:40px;
     margin-right:-60px;
 }
+

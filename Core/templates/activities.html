@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/activities.css' %}">
+<div class="top-bar">
+    <h3>Activities</h3>
+    <input type="text" placeholder="Search activities">
+</div>
+<div class='activities-detail'>
+
+  <div class='task'>
+    <h4>Task</h4>
+    <p>Project-X</p>
+    <p>Project-A</p>
+    <p>Project-Y</p>
+    <p>Project-B</p>
+    <p>Project-C</p>
+    <p>Project-Z</p>
+  </div>
+  <div class='deadline'>
+    <h4>Deadline</h4>
+    <p>2024-9-2</p>
+    <p>2024-9-30</p>
+    <p>2024-5-2</p>
+    <p>2024-4-1</p>
+    <p>2024-9-22</p>
+    <p>2024-9-12</p>
+  </div>
+  <div class="progress">
+    <h4>Progress</h4>
+    <button class="progress-status">Pro...</button>
+    <button class="done-status">Done</button>
+    <button class="done-status">Done</button>
+    <button class="progress-status">Pro...</button>
+    <button class="done-status">Done</button>
+    <button class="progress-status">Pro...</button>
+  </div>
+</div>
+{% endblock %}
