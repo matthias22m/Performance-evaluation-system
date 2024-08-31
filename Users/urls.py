@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/', views.EmployeeView, name = 'profile') ,
     path('activities/',views.list_activities,name='activities') ,
     path('evaluation/',views.Evaluation,name='user-evaluation')          
+    path('',views.user),   
 ]

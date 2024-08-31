@@ -105,3 +105,5 @@ def Evaluation(request):
         evaluation.save()
         
     return render(request,'Users/evaluationPage.html',contexts)
+def user(request):
+    return render(request,'Users/user.html')
