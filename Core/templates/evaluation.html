@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/evaluation.css' %}">
+<h4>Evaluate:</h4>
+<div class='member-btn'>
+    <label for="members">Group Member:</label>
+    <select id="members" name="members" required>
+        <option value="" disabled selected hidden>Select a member</option>
+        <option value="oli">Oli</option>
+        <option value="abenezer">Abenezer</option>
+        <option value="another-member">Another Member</option>
+    </select>
+
+</div>
+<div class='assessment'>
+<div class='activity-btn'>
+    <label for="activity"> Activity:</label>
+    <select id="activity" name="activity" required>
+        <option value="" disabled selected hidden>Select a activity</option>
+        <option value=></option>
+        <option value=></option>
+        <option value=></option>
+        <option value=></option>
+    </select>
+
+</div>
+<div class='weight-btn'>
+    <label for="weight"> Weight:</label>
+    <select id="weight" name="weight" required>
+        <option value="" disabled selected hidden>Weight</option>
+        <option value=></option>
+        <option value=></option>
+        <option value=></option>
+        <option value=></option>
+    </select>
+
+</div>
+</div>
+<button class='done-btn'>Done</button>
+
+{% endblock %}
