@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<div class="profile-container">
+    <div class="profile-image">
+        <img src="{% static 'images/profile.jpg' %}" alt="Profile Image" />
+    </div>
+    <div class="profile-details">
+        <h2>Abdi</h2>
+        <h5>Software Engineer</h5>
+        <p><span class="label">Email:</span> abdi@gmail.com</p>
+        <p><span class="label">Phone:</span> +251----</p>
+        <p><span class="label">Position:</span> Project Manager</p>
+    </div>
+</div>
+
+{% endblock %}
