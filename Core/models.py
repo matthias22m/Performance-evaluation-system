@@ -36,16 +36,18 @@ class AnnualPlan(models.Model):
     
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='annual_plans')
     months = models.CharField(max_length=2, choices=MONTH_CHOICES)
+    activity = models.TextField()
     weight = models.FloatField()
     result = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f'Annual Plan for {self.plan.unit.name}'
+        return f'Annual Plan for {self.plan.unit.name} - {self.activity[0:20]}'
 
 
 class CasualPlan(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='casual_plans')
     deadline = models.DateField()
+    activity = models.TextField()
     weight = models.FloatField()
     result = models.FloatField(null=True, blank=True)
 
@@ -62,7 +64,7 @@ class SubActivity(models.Model):
     result = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return f'Sub Activity for {self.employee.name}'
+        return f'Sub Activity for {self.employee.email}'
 
 '''
 Implication
