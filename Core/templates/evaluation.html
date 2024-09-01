@@ -3,10 +3,11 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="{% static 'css/evaluation.css' %}">
-<h4>Evaluate:</h4>
+<h4><strong>Evaluate:</strong></h4>
 <div class='member-btn'>
-    <label for="members">Group Member:</label>
-    <select id="members" name="members" required>
+    <label  class='member-title' for="members">Group Member:</label>
+
+    <select class='member-select-btn' id="members" name="members" required>
         <option value="" disabled selected hidden>Select a member</option>
         <option value="oli">Oli</option>
         <option value="abenezer">Abenezer</option>
@@ -16,8 +17,8 @@
 </div>
 <div class='assessment'>
 <div class='activity-btn'>
-    <label for="activity"> Activity:</label>
-    <select id="activity" name="activity" required>
+    <label class='activity-title' for="activity"> Activity:</label>
+    <select class='activity-select-btn' id="activity" name="activity" required>
         <option value="" disabled selected hidden>Select a activity</option>
         <option value=></option>
         <option value=></option>
@@ -27,8 +28,8 @@
 
 </div>
 <div class='weight-btn'>
-    <label for="weight"> Weight:</label>
-    <select id="weight" name="weight" required>
+    <label  class='weight-title' for="weight"> Weight:</label>
+    <select class='weight-select-btn' id="weight" name="weight" required>
         <option value="" disabled selected hidden>Weight</option>
         <option value=></option>
         <option value=></option>
@@ -40,4 +41,38 @@
 </div>
 <button class='done-btn'>Done</button>
 
+<h4><strong>Review:</strong></h4>
+<div class="review-detail">
+    <table class="review-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Activity</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ali</td>
+                <td>Project-X</td>
+                <td><button >4</button></td>
+            </tr>
+            <tr>
+                <td>Daniel</td>
+                <td>Project-A</td>
+                <td><button >5</button></td>
+            </tr>
+            <tr>
+                <td>Ayele</td>
+                <td>Project-Z</td>
+                <td><button>1</button></td>
+            </tr>
+           
+        </tbody>
+    </table>
+</div>
+<button class='submit-btn'>Submit</button>
+<div>
+    <div>
+</div>
 {% endblock %}

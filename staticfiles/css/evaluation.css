@@ -1,0 +1,72 @@
+/* Container for the entire form section */
+h4 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.member-btn, .activity-btn, .weight-btn {
+    margin-bottom: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Label styling */
+label {
+    font-size: 1rem;
+    color: #333;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-right: 10px;
+}
+
+/* Select dropdown styling */
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 300px;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+.assessment{
+    display: flex;
+}
+.member-title{
+    margin-bottom:10px;
+    font-size: 10px;
+}
+.weight-btn{
+    margin-left:55px;
+    padding-left:20px;
+}
+/* Change border color on focus */
+select:focus {
+    border-color: #007bff; /* Blue border when focused */
+    outline: none;
+}
+
+/* Additional styling for the select containers */
+.member-btn, .activity-btn, .weight-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and select */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+    select {
+        width: 100%;
+    }
+}
+
+.done-btn{
+  background-color:#007bff;
+  height:30px;
+  width:70px;
+  color:white;
+  font-family:Arial, Helvetica, sans-serif;
+  border:none;
+  margin-top:5px;
+  border-radius: 10px;
+  font-size: 16px;
+}
