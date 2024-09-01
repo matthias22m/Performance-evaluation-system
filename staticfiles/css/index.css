@@ -1,0 +1,94 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #101ff5e0; /* Navbar background color */
+    color: white;
+    padding: 1rem;
+    border-radius: 30px;
+    margin: 28px 20px 20px;
+    height: 80px;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.logo {
+    background-color: #101ff5e0; /* Match this color with the navbar background */
+    border-radius: 50%; /* Makes the logo circular */
+    height: 50px; /* Adjust height as needed */
+    width: 50px; /* Ensure the logo is square */
+    object-fit: cover; 
+    margin-top:-35px;/* Ensure the image fits well within the circle */
+}
+
+/* Navbar links styling */
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+   
+    margin-top:-30px;
+    margin-right: 50px;
+    margin-left:240px;
+    align-items: center; /* Center items vertically */
+}
+
+.navbar-nav li {
+    margin-left: 1rem;
+
+}
+
+.navbar-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    
+    border-radius: 4px;
+}
+
+.navbar-nav a:hover {
+    background-color: #555;
+}
+
+/* Main content container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.logout-btn{
+    background-color: black;
+    color:white;
+    border-radius:40px;
+    height:30px;
+    width:70px;
+    border:none;
+    margin-top:-20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    margin-left:40px;
+    margin-right:-60px;
+}
+
