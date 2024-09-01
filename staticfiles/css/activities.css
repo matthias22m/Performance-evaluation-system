@@ -1,0 +1,82 @@
+.top-bar {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.top-bar h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.top-bar input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+    width: 200px;
+}
+.activity-title,.task-1,.task-2,.task-3,.task-4,.task-5,.task-6 {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.activities-detail h4 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.task, .deadline, .progress {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.task p, .deadline p, .progress button {
+    margin: 0;
+    font-size: 1em;
+}
+.task p, .deadline p{
+    margin-bottom:12px;
+}
+.progress-status {
+    color: #fff;
+    background-color: #007bff; /* Blue for Progress */
+    border: none;
+    width:60px;
+    height:30px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.done-status {
+    color: #fff;
+    background-color: #28a745; /* Green for Done */
+    width:60px;
+    height:30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.progress button:hover {
+    opacity: 0.9;
+}
