@@ -24,6 +24,10 @@ def edit_activity(request, id):
         return redirect('activities') 
 
     return render(request, 'edit_activity.html', {'activity': activity})
+def delete_activity(request, id):
+    activity = get_object_or_404(Activity, id=id)
+    activity.delete()
+    return redirect('activities')
 
 @require_POST
 def add_activity(request):
