@@ -1,0 +1,96 @@
+h4 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.member-btn{
+    margin-bottom: 20px;
+    
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Label styling */
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 80px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+/* Select dropdown styling */
+select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 300px;
+    margin-left:-80px;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+.member-select-btn{
+    margin-left:-125px;
+
+}
+
+.member-select-btn{
+    width:400px;
+    height:45px;
+    border-radius: 10px;
+}
+/* Change border color on focus */
+select:focus {
+    border-color: #007bff; /* Blue border when focused */
+    outline: none;
+}
+
+/* Additional styling for the select containers */
+.member-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and select */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 600px) {
+    select {
+        width: 100%;
+    }
+}
+.evaluation-detail {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.evaluation-table {
+    width: 100%;
+    
+    margin-top: 20px;
+}
+
+.evaluation-table th,
+.evaluation-table td {
+    padding: 12px 30px; /* Increased padding to create more space between columns */
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.evaluation-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.evaluation-table tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+.weight-in-percent,
+.weight {
+    border-radius: 5px; /* Adjusted border-radius */
+    width: 20px; /* Adjusted width */
+    height: 20px; /* Adjusted height */
+    padding: 5px; /* Added padding for better input appearance */
+    border: 1px solid #ccc; /* Border for input fields */
+    font-size: 14px; /* Adjusted font size for readability */
+    text-align: center; /* Center align text inside the input */
+}
