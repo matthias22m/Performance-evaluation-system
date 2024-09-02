@@ -62,7 +62,7 @@ class Profile(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=255)
-    employee = models.ForeignKey(Employee, related_name='group', on_delete=models.PROTECT)
+    employee = models.ManyToManyField(Employee, related_name='group')
 
     def __str__(self):
         return self.name
