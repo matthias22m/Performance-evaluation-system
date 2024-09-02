@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'Users/login.css' %}" />
+  </head>
+  <body>
+    <nav>
+      <img
+        class="astu-logo"
+        src="{% static 'Users/assets/ASTU.png' %}"
+        alt=""
+      />
+    </nav>
+    <section class="container">
+      <div>
+        <img
+          class="login-svg"
+          src="{% static 'Users/assets/astu Login.svg' %}"
+          alt=""
+        />
+      </div>
+      <div>
+        <h1 class="form-header">LOGIN</h1>
+        <form class="login-form" action="{% url 'login' %}" method="post">
+          {% csrf_token %} {% if form.non_field_errors %}
+          <div class="error-message">
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <label for="username"><strong> EMAIL :</strong> </label>
+          <input
+            class="email-input"
+            name="username"
+            id="username"
+            type="text"
+            required
+          />
+          {% if form.username.errors %}
+          <div class="error field-errors">
+            {% for error in form.username.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <label for="password"><strong> PASSWORD :</strong> </label>
+          <input
+            class="password-input"
+            name="password"
+            id="password"
+            type="password"
+            required
+          />
+          {% if form.password.errors %}
+          <div class="error-message">
+            {% for error in form.password.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div>
+            <input
+              class="remember-me"
+              id="rememberme"
+              name="rememberme"
+              type="checkbox"
+            />
+            <label for="rememberme">Remember me</label>
+          </div>
+
+          <input class="login-submit" type="submit" value="Login" />
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
