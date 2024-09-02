@@ -94,5 +94,9 @@ class CharacterEvaluation(models.Model):
 
 class Activity(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
     deadline = models.DateField()
-    description = models.TextField()
+    assigned_person = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
