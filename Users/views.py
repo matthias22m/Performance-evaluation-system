@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import EmployeeRegisterForm
 from django.contrib.auth.decorators import login_required
+
 from .models import Employee, Profile, Group
 from Core.models import CharacterEvaluation
 
