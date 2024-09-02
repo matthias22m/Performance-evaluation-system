@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Employee, Group
+from .models import Employee, Group, Profile
 
 class EmployeeAdmin(BaseUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
@@ -24,3 +25,4 @@ class EmployeeAdmin(BaseUserAdmin):
 
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Group)
+admin.site.register(Profile)
