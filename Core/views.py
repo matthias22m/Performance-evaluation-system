@@ -13,4 +13,4 @@ def evaluation(request):
     return render(request, 'core/evaluation.html')
 
 def logout_view(request):
-    return render(request, 'core/logout.html')  # Redirect or render a logout page
+    return render(request, 'core/logout.html')
