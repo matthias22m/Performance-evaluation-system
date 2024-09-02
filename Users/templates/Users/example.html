@@ -1,0 +1,15 @@
+<html>
+  <h1>name: {{target_employee.first_name}} {{target_employee.last_name}}</h1>
+  <h1>email: {{target_employee.email}}</h1>
+  <h1>postion: {{target_employee.position}}</h1>
+  <img src="{{employee_image.image.url}}" alt="profileimage" />
+  <h2>group memebers</h2>
+  <h3>
+    <ul>
+      <li>name: {{employee_group.name}}</li>
+
+      <li>name: {{employee_group.employee.first_name}}</li>
+    </ul>
+  </h3>
+  <h1>{{total_evaluation}}</h1>
+</html>

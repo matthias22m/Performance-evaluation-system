@@ -89,6 +89,6 @@ class CharacterEvaluation(models.Model):
     behavior_six = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
 
     def __str__(self):
-        return f'Evaluation for {self.employee.name} by {self.evaluator.name}'
+        return f'Evaluation for {self.employee.first_name} by {self.evaluator.last_name}'
 
 
