@@ -8,21 +8,20 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
-<body class="{% if request.resolver_match.url_name == 'index' %}homepage{% endif %}">
+<body >
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <a href="{% url 'index' %}" class="navbar-brand">
+            
                 <img src="{% static 'images/logo.jpg' %}" alt=" Logo" class='logo'>
-            </a>
-            {% if request.resolver_match.url_name != 'index' %}
+            
+          
             <ul class="navbar-nav">
                 <li><a href="/">Home</a></li>
                 <li><a href="/">Activities</a></li>
                 <li><a href="/">Evaluation</a></li>
             </ul>
             <button class='logout-btn'>Logout</button>
-            {% endif %}
            
         </div>
     </nav>
