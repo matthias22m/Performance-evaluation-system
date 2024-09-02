@@ -1,5 +1,4 @@
-{% load static %}  <!-- This line loads the static tag library -->
-
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +9,11 @@
 </head>
 <body>
 
-    {% include 'core/navbar.html' %}  <!-- This includes your navigation bar -->
+    {% include 'core/navbar.html' %} 
 
     <div class="container mt-4">
         <h1 class="mb-4">Activity</h1>
-        <form method="post" action="{% url 'add_activity' %}" class="mb-4"> <!-- Replace 'add_activity' with your actual URL name -->
+        <form method="post" action="{% url 'add_activity' %}" class="mb-4">
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-4">
@@ -22,17 +21,24 @@
                         <label for="activity-name">Activity Name:</label>
                         <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="Add Activity....." required>
                     </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Description....."></textarea>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-left: 270px;">
                     <div class="form-group">
                         <label for="deadline">Deadline Date:</label>
                         <input type="date" class="form-control" id="deadline" name="deadline" placeholder="yyyy/mm/dd" required>
                     </div>
-                </div>
-                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description" rows="1" placeholder="Description....."></textarea>
+                        <label for="assign_person">Assign person:</label>
+                        <select class="form-control" id="assign_person" name="assign_person">
+                            <option value="">Select a person</option>
+                            <option value="1">Fenet</option>
+                            <option value="2">fen</option>
+                       
+                        </select>
                     </div>
                 </div>
             </div>
