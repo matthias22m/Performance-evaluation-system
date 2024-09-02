@@ -44,7 +44,16 @@
             updateActivityListMessage();
         }
 
-    
+        function editActivity(button) {
+            currentEditRow = button.closest('tr'); 
+            const activityName = currentEditRow.cells[0].innerText;
+            const deadline = currentEditRow.cells[1].innerText;
+
+            document.getElementById('activity-name').value = activityName;
+            document.getElementById('deadline').value = deadline;
+            const addButton = document.querySelector('button[type="submit"]');
+            addButton.innerText = 'Update';
+        }
 
    
 
