@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'core/navbar.css' %}">  <!-- Link to your navbar CSS -->
+    <link rel="stylesheet" href="{% static 'core/navbar.css' %}">  
+    <style></style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'core/logo.png' %}" alt="Logo" class="logo">
+        </a>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>

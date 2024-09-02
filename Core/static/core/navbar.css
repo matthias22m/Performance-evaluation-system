@@ -1,0 +1,40 @@
+
+.navbar-custom {
+    background-color: #007bff; 
+    padding: 10px;
+}
+
+.navbar-custom .logo {
+    height: 50px; 
+    padding-left: 10px;
+}
+
+.navbar-custom .navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white; 
+    margin-right: 20px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+    color: #f8f9fa; 
+}
+
+.navbar-custom .navbar-nav .nav-item:last-child {
+    margin-right: 0;
+}
+
+@media (max-width: 768px) {
+    .navbar-custom .navbar-nav {
+        text-align: center; 
+    }
+    
+    .navbar-custom .navbar-nav .nav-link {
+        margin: 10px 0; 
+    }
+}
