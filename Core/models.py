@@ -92,3 +92,7 @@ class CharacterEvaluation(models.Model):
         return f'Evaluation for {self.employee.name} by {self.evaluator.name}'
 
 
+class Activity(models.Model):
+    name = models.CharField(max_length=255)
+    deadline = models.DateField()
+    description = models.TextField()

@@ -1,3 +1,73 @@
-{% load static %}
-{% include 'core/navbar.html' %}
+{% load static %}  <!-- This line loads the static tag library -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activities</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    {% include 'core/navbar.html' %}  <!-- This includes your navigation bar -->
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Activity</h1>
+        <form method="post" action="{% url 'add_activity' %}" class="mb-4"> <!-- Replace 'add_activity' with your actual URL name -->
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="activity-name">Activity Name:</label>
+                        <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="Add Activity....." required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="deadline">Deadline Date:</label>
+                        <input type="date" class="form-control" id="deadline" name="deadline" placeholder="yyyy/mm/dd" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control" id="description" name="description" rows="1" placeholder="Description....."></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <h2 class="mb-4">List of Activities:</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Activity Name</th>
+                    <th>Deadline</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.deadline }}</td>
+                    <td>
+                        <a href="{% url 'edit_activity' activity.id %}" class="btn btn-info btn-sm">edit</a>
+                        <a href="{% url 'delete_activity' activity.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this activity?');">delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No activities found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-primary">Submit</button>
+    </div>
+
+</body>
+</html>
