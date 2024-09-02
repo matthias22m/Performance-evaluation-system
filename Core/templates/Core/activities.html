@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,44 +9,58 @@
     <script>
         let currentEditRow = null;
 
+        function loadActivities() {
+            const activities = JSON.parse(localStorage.getItem('activities')) || [];
+            const tableBody = document.getElementById('activity-list');
+            tableBody.innerHTML = '';
+
+            activities.forEach((activity, index) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${activity.name}</td>
+                    <td>${activity.deadline}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="editActivity(this, ${index})">edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteActivity(this)">delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+
+            updateActivityListMessage();
+        }
+
         function addActivity(event) {
             event.preventDefault();
             const activityName = document.getElementById('activity-name').value;
             const deadline = document.getElementById('deadline').value;
+
             if (!activityName || !deadline) {
                 alert('Please fill in all required fields.');
                 return;
             }
 
+            const activities = JSON.parse(localStorage.getItem('activities')) || [];
+
             if (currentEditRow) {
-                currentEditRow.cells[0].innerText = activityName;
-                currentEditRow.cells[1].innerText = deadline;
+                const index = currentEditRow.dataset.index;
+                activities[index].name = activityName;
+                activities[index].deadline = deadline;
                 currentEditRow = null; 
                 document.querySelector('button[type="submit"]').innerText = 'Add';
             } else {
-                const tableBody = document.getElementById('activity-list');
-                const newRow = document.createElement('tr');
-
-                newRow.innerHTML = `
-                    <td>${activityName}</td>
-                    <td>${deadline}</td>
-                    <td>
-                        <button class="btn btn-info btn-sm" onclick="editActivity(this)">edit</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteActivity(this)">delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(newRow);
+                activities.push({ name: activityName, deadline: deadline });
             }
 
-            // Clear input fields
+            localStorage.setItem('activities', JSON.stringify(activities));
+            loadActivities();
             document.getElementById('activity-name').value = '';
-            document.getElementById('description').value = '';
             document.getElementById('deadline').value = '';
-            updateActivityListMessage();
         }
 
-        function editActivity(button) {
+        function editActivity(button, index) {
             currentEditRow = button.closest('tr'); 
+            currentEditRow.dataset.index = index; 
             const activityName = currentEditRow.cells[0].innerText;
             const deadline = currentEditRow.cells[1].innerText;
 
@@ -59,8 +73,12 @@
         function deleteActivity(button) {
             if (confirm('Are you sure you want to delete this activity?')) {
                 const row = button.closest('tr');
-                row.remove();
-                updateActivityListMessage();
+                const activities = JSON.parse(localStorage.getItem('activities')) || [];
+                const index = row.dataset.index;
+
+                activities.splice(index, 1);
+                localStorage.setItem('activities', JSON.stringify(activities));
+                loadActivities();
             }
         }
 
@@ -74,6 +92,8 @@
                 messageRow.style.display = 'none'; 
             }
         }
+
+        window.onload = loadActivities;
     </script>
 </head>
 <body>
@@ -95,7 +115,7 @@
                         <textarea class="form-control" id="description" name="description" rows="4" placeholder="Description....."></textarea>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-left: 270px;">
                     <div class="form-group">
                         <label for="deadline">Deadline Date:</label>
                         <input type="date" class="form-control" id="deadline" name="deadline" required>
@@ -123,29 +143,11 @@
                 </tr>
             </thead>
             <tbody id="activity-list">
-                {% for activity in activities %}
-                <tr>
-                    <td>{{ activity.name }}</td>
-                    <td>{{ activity.deadline }}</td>
-                    <td>
-                        <button class="btn btn-info btn-sm" onclick="editActivity(this)">edit</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteActivity(this)">delete</button>
-                    </td>
-                </tr>
-                {% empty %}
                 <tr id="no-activities-message" style="display: none;">
                     <td colspan="3">No activity added.</td>
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
-
-        <button type="button" class="btn btn-primary">Submit</button>
     </div>
-
-    <script>
-        // Initial check to update the activity list message
-        updateActivityListMessage();
-    </script>
 </body>
 </html>
