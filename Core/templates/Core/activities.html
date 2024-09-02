@@ -55,7 +55,14 @@
             addButton.innerText = 'Update';
         }
 
-   
+        function deleteActivity(button) {
+            if (confirm('Are you sure you want to delete this activity?')) {
+                const row = button.closest('tr');
+                row.remove();
+                updateActivityListMessage();
+            }
+        }
+
 
     </script>
 </head>
