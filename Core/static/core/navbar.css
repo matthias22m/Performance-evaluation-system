@@ -47,3 +47,14 @@
     object-fit: cover;
     display: block;
 }
+.logout {
+    background-color: black;
+    border-radius: 25px;
+    width: 85px;
+    color: white; 
+    text-align: center; 
+    padding: 3px; 
+    text-decoration: none; 
+    display: inline-block;
+    height: 48px;
+}
