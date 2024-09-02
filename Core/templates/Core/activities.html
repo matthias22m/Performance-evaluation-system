@@ -63,7 +63,16 @@
             }
         }
 
+        function updateActivityListMessage() {
+            const tableBody = document.getElementById('activity-list');
+            const messageRow = document.getElementById('no-activities-message');
 
+            if (tableBody.rows.length === 0) {
+                messageRow.style.display = '';
+            } else {
+                messageRow.style.display = 'none';
+            }
+        }
     </script>
 </head>
 <body>
