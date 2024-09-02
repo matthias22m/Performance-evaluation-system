@@ -12,6 +12,18 @@ class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = ('name', 'deadline', 'description')
+def edit_activity(request, id):
+    activity = get_object_or_404(Activity, id=id)
+    
+    if request.method == 'POST':
+        activity.name = request.POST.get('activity_name')
+        activity.deadline = request.POST.get('deadline')
+        activity.description = request.POST.get('description')
+        activity.assigned_person = request.POST.get('assign_person')
+        activity.save()
+        return redirect('activities') 
+
+    return render(request, 'edit_activity.html', {'activity': activity})
 
 @require_POST
 def add_activity(request):
