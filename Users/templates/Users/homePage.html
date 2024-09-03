@@ -1,80 +1,117 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
     <link rel="stylesheet" href="{% static 'Users/homeStyle.css' %}" />
     <script src="{% static 'Users/homePage.js' %}" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <ul class="navbar">
-            <li><img src="{% static 'Users/assets/download.png' %}" class="logo"></li>
-            <li class="EmployeeViewBar"><a href="#">Home</a></li>
-            <li class="EmployeeViewBar"><a href="#">Activities</a></li>
-            <li class="EmployeeViewBar"><a href="#">Evaluation</a></li>
-            <li class="EmployeeViewBar"><img src="{{employee_image.image.url}}"  class="navbarprofile"></li>
-            <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
-            <li class="humburgerMenu"  onclick="showitems()"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF">
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></li>
-        </ul>
-        <ul class="navbar" id="navbar">
-            <li onclick="hideItmes()"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
-            <li><img src="{{employee_image.image.url}}" alt="Profile Picture" class="navbarprofile" id="navbarprofile"></li>
-            __________________________
-            <li onclick="hideItmes()"><a href="#">Home</a></li>
-            <li onclick="hideItmes()"><a href="#">Activities</a></li>
-            <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
-            <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
-        </ul>
+      <ul class="navbar">
+        <li>
+          <img src="{% static 'Users/assets/download.png' %}" class="logo" />
+        </li>
+        <li class="EmployeeViewBar"><a href="#">Home</a></li>
+        <li class="EmployeeViewBar"><a href="#">Activities</a></li>
+        <li class="EmployeeViewBar"><a href="#">Evaluation</a></li>
+        <li class="EmployeeViewBar">
+          <img src="{{employee_image.image.url}}" class="navbarprofile" />
+        </li>
+        <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
+        <li class="humburgerMenu" onclick="showitems()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="34px"
+            viewBox="0 -960 960 960"
+            width="34px"
+            fill="#FFFFFF"
+          >
+            <path
+              d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+            />
+          </svg>
+        </li>
+      </ul>
+      <ul class="navbar" id="navbar">
+        <li onclick="hideItmes()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="34px"
+            viewBox="0 -960 960 960"
+            width="34px"
+            fill="#FFFFFF"
+          >
+            <path
+              d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+            />
+          </svg>
+        </li>
+        <li>
+          <img
+            src="{{employee_image.image.url}}"
+            alt="Profile Picture"
+            class="navbarprofile"
+            id="navbarprofile"
+          />
+        </li>
+        __________________________
+        <li onclick="hideItmes()"><a href="#">Home</a></li>
+        <li onclick="hideItmes()"><a href="#">Activities</a></li>
+        <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
+        <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
+      </ul>
     </nav>
     <main>
-        <div class="profile">
-            <img src="{{employee_image.image.url}}" alt="Profile Picture">
-            <div class="profile-info">
-                <h2 style="margin-bottom:0;">{{target_employee.first_name}} {{target_employee.last_name}}</h2>
-                <p class="position-text">{{target_employee.position}}</p>
-                <div id="profile-info">
-                    <p><strong>Email:</strong>{{target_employee.email }} </p>
-                    <p><strong>Phone:</strong>{{target_employee.phone_number}}</p>
-                    <p><strong>Position:</strong> Project Manager</p>
-                </div>
-            </div>
+      <div class="profile">
+        <img src="{{employee_image.image.url}}" alt="Profile Picture" />
+        <div class="profile-info">
+          <h2 style="margin-bottom: 0">
+            {{target_employee.first_name}} {{target_employee.last_name}}
+          </h2>
+          <p class="position-text">{{target_employee.position}}</p>
+          <div id="profile-info">
+            <p><strong>Email:</strong>{{target_employee.email }}</p>
+            <p><strong>Phone:</strong>{{target_employee.phone_number}}</p>
+            <p><strong>Position:</strong> Project Manager</p>
+          </div>
         </div>
-        <div class="main">
-            <section class="activities">
-                <h2>Recent Activities</h2>
-                <div class="activity">
-                    <h3>Project-X</h3>
-                    <p>Date: 2024-08-28</p>
-                    <p>Detail: Discussed upcoming projects and assigned tasks to team members.</p>
-                </div>
-                <div class="activity">
-                    <h3>Project-Y</h3>
-                    <p>Date: 2024-08-28</p>
-                    <p>Detail: Discussed upcoming projects and assigned tasks to team members.</p>
-                </div>
-                <a href="#" class="nextpage" id="nextpage">All Activities →</a>
-            </section>
-            <section class="group-members">
-                <h2>Group Members</h2>
-                <div class="member">
-                    <h3>Yetngaw Sewye Tefa</h3>
-                    <p class="position-text">Backend Developer</p>
-                    <p>Phone: +251999999999</p>
-                    <p>Email: yetingaw@gmail.com</p>
-                </div>
-                <div class="member">
-                    <h3>Yetngaw Sewye Tefa</h3>
-                    <p class="position-text">Frontend Developer</p>
-                    <p>Phone: +251999999999</p>
-                    <p>Email: yetingaw@gmail.com</p>
-                </div>
-            </section>
-
-        </div>
+      </div>
+      <div class="main">
+        <section class="activities">
+          <h2>Recent Activities</h2>
+          <div class="activity">
+            <h3>Project-X</h3>
+            <p>Date: 2024-08-28</p>
+            <p>
+              Detail: Discussed upcoming projects and assigned tasks to team
+              members.
+            </p>
+          </div>
+          <div class="activity">
+            <h3>Project-Y</h3>
+            <p>Date: 2024-08-28</p>
+            <p>
+              Detail: Discussed upcoming projects and assigned tasks to team
+              members.
+            </p>
+          </div>
+          <a href="#" class="nextpage" id="nextpage">All Activities →</a>
+        </section>
+        <section class="group-members">
+          <h2>Group Members</h2>
+          {% for emp in employees%}
+          <div class="member">
+            <h3>{{emp.first_name}} {{emp.last_name}}</h3>
+            <p class="position-text">{{emp.postion}}</p>
+            <p>Phone: {{emp.phone_number}}</p>
+            <p>Email: {{emp.email}}</p>
+          </div>
+          {% endfor %} 
+        </section>
+      </div>
     </main>
-</body>
+  </body>
 </html>

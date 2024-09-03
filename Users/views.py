@@ -21,14 +21,17 @@ def EmployeeView(request):
     user = request.user
     target_employee = Employee.objects.get(id = user.id)
     employee_image = Profile.objects.get(id = user.id)
-    employee_group = Group.objects.get(id = user.id)
+    employee_group = target_employee.group.all().first()
+        
+
     evaluations = CharacterEvaluation.objects.get(id = user.id)
     total_evaluation = evaluations.behavior_one + evaluations.behavior_two + evaluations.behavior_three + evaluations.behavior_four + evaluations.behavior_five + evaluations.behavior_six
     context = {
         "target_employee": target_employee,
         "employee_image":employee_image,
         "employee_group":employee_group,
-        "total_evaluation":total_evaluation
+        "total_evaluation":total_evaluation,
+        "employees":employee_group.employee.all()
     }
     return render(request, 'Users/homePage.html', context)
 
