@@ -82,22 +82,14 @@
       <div class="main">
         <section class="activities">
           <h2>Recent Activities</h2>
+          {% for sub_activity in recent_activities %}
           <div class="activity">
-            <h3>Project-X</h3>
-            <p>Date: 2024-08-28</p>
-            <p>
-              Detail: Discussed upcoming projects and assigned tasks to team
-              members.
-            </p>
+            <h3>{{sub_activity.activity}}</h3>
+            <p><strong>Deadline: </strong>{{sub_activity.deadline}}</p>
+            <p><strong>Weight: </strong> {{sub_activity.weight}}</p>
           </div>
-          <div class="activity">
-            <h3>Project-Y</h3>
-            <p>Date: 2024-08-28</p>
-            <p>
-              Detail: Discussed upcoming projects and assigned tasks to team
-              members.
-            </p>
-          </div>
+          {% endfor %}
+
           <a href="#" class="nextpage" id="nextpage">All Activities →</a>
         </section>
         <section class="group-members">
@@ -109,7 +101,7 @@
             <p>Phone: {{emp.phone_number}}</p>
             <p>Email: {{emp.email}}</p>
           </div>
-          {% endfor %} 
+          {% endfor %}
         </section>
       </div>
     </main>
