@@ -15,7 +15,7 @@
     
     <div class="container mt-5">
         <h2 class="mb-4">Add Employee</h2>
-        <form>
+        <form id="employeeForm">
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="name">Name</label>
@@ -60,5 +60,53 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            var name = document.getElementById('name').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var jobCategory = document.getElementById('jobCategory').value.trim();
+            var evaluationResult = document.getElementById('evaluationResult').value.trim();
+            var sex = document.querySelector('input[name="sex"]:checked');
+
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var phonePattern = /^\d+$/;
+
+            if (name === "") {
+                alert("Please enter a name.");
+                return;
+            }
+            if (phone === "") {
+                alert("Please enter a phone number.");
+                return;
+            }
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid phone number (digits only).");
+                return;
+            }
+            if (email === "") {
+                alert("Please enter an email address.");
+                return;
+            }
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            if (jobCategory === "") {
+                alert("Please enter a job category.");
+                return;
+            }
+            if (evaluationResult === "") {
+                alert("Please enter an evaluation result.");
+                return;
+            }
+            if (!sex) {
+                alert("Please select the sex.");
+                return;
+            }
+            alert("Form submitted successfully!");
+        });
+    </script>
 </body>
 </html>
