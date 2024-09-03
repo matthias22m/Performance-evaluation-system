@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Form</title>
+    <link rel="stylesheet" href="{% static 'Users/evaluationStyle.css' %}" />
+    <script src="{% static 'Users/evaluationPage.js' %}" defer></script>
+</head>
+<body>
+    <nav>
+        <ul class="navbar">
+            <li><img src="{% static 'Users/assets/download.png' %}" class="logo"></li>
+            <li class="EmployeeViewBar"><a href="#">Home</a></li>
+            <li class="EmployeeViewBar"><a href="#">Activities</a></li>
+            <li class="EmployeeViewBar"><a href="#">Evaluation</a></li>
+            <li class="EmployeeViewBar"><img src="{{employee_image.image.url}}" class="navbarprofile"></li>
+            <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
+            <li class="humburgerMenu"  onclick="showitems()"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></li>
+        </ul>
+        <ul class="navbar" id="navbar">
+            <li onclick="hideItmes()"><svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></li>
+            <li><img src="{{employee_image.image.url}}" alt="Profile Picture" class="navbarprofile" id="navbarprofile"></li>
+            __________________________
+            <li onclick="hideItmes()"><a href="#">Home</a></li>
+            <li onclick="hideItmes()"><a href="#">Activities</a></li>
+            <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
+            <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="evaluation-container">
+        <h2>Evaluate:</h2>
+        <label for="group-member">Group Member:</label>
+        <select id="group-member">
+            <option>Select Member........</option>
+            <option >software devloper team</option>
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criteria</th>
+                    <th>Weight in %</th>
+                    <th>Weight</th>
+                    <th class="total">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tsebaju endet nw?</td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                    min="0" max="100" step="1" placeholder="0-100%"></td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                        min="1" max="5" step="1" placeholder="1-5"></td>
+                    <td class="total">1.25</td>
+                </tr>
+                <tr>
+                    <td>sra sisera endet nw?</td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                    min="0" max="100" step="1" placeholder="0-100%"></td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                        min="1" max="5" step="1" placeholder="1-5"></td>
+                    <td>1.25</td>
+                </tr>
+                <tr>
+                    <td>yetsetewn sra yseral weyis?</td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                    min="0" max="100" step="1" placeholder="0-100%"></td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                        min="1" max="5" step="1" placeholder="1-5"></td>
+                    <td>1.25</td>
+                </tr>
+                <tr>
+                    <td>attendansus?</td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                    min="0" max="100" step="1" placeholder="0-100%"></td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                        min="1" max="5" step="1" placeholder="1-5"></td>
+                    <td>1.25</td>
+                </tr>
+                <tr>
+                    <td>begize ymetal weyis?</td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                    min="0" max="100" step="1" placeholder="0-100%"></td>
+                    <td><input type="number" id="percentage" name="percentage" 
+                        min="1" max="5" step="1" placeholder="1-5"></td>
+                    <td>1.25</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="submit-btn">Submit</button>
+    </div>
+</body>
+</html>
