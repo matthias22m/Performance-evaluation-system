@@ -69,9 +69,11 @@
             var jobCategory = document.getElementById('jobCategory').value.trim();
             var evaluationResult = document.getElementById('evaluationResult').value.trim();
             var sex = document.querySelector('input[name="sex"]:checked');
-            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             var phonePattern = /^\+\d+$/;
-            var numberPattern = /^\d+$/; 
+            var numberPattern = /^\d+$/;
+
             if (name === "") {
                 alert("Please enter a name.");
                 return;
@@ -108,6 +110,7 @@
                 alert("Please select the sex.");
                 return;
             }
+
             alert("Form submitted successfully!");
         });
     </script>
