@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import EmployeeRegisterForm
 from django.contrib.auth.decorators import login_required
@@ -20,8 +20,9 @@ def register(request):
 
 def EmployeeView(request):
     user = request.user
-    target_employee = Employee.objects.get(id = user.id)
-    employee_image = Profile.objects.get(id = user.id)
+    target_employee = get_object_or_404(Employee, id=user.id)
+    employee_image = Profile.objects.filter(id = user.id).first()
+    recent_activities = SubActivity.objects.filter(employee=target_employee).values()
     employee_group = target_employee.group.all().first()
     activities=SubActivity.objects.all()
 
