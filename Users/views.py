@@ -25,8 +25,8 @@ def EmployeeView(request):
     target_employee = Employee.objects.get(id = user.id)
     employee_image = Profile.objects.get(id = user.id)
     employee_group = Group.objects.get(id = user.id)
-    character_evaluation_employee = CharacterEvaluation.objects.get(id = user.id)
-    total_evaluation = character_evaluation_employee.behavior_one + character_evaluation_employee.behavior_two + character_evaluation_employee.behavior_three + character_evaluation_employee.behavior_four + character_evaluation_employee.behavior_five + character_evaluation_employee.behavior_six
+    evaluations = CharacterEvaluation.objects.get(id = user.id)
+    total_evaluation = evaluations.behavior_one + evaluations.behavior_two + evaluations.behavior_three + evaluations.behavior_four + evaluations.behavior_five + evaluations.behavior_six
     context = {
         "target_employee": target_employee,
         "employee_image":employee_image,
