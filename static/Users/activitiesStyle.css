@@ -1,0 +1,217 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size:medium;
+    background-color: rgb(218, 218, 218);
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+   height: 100vh;
+}
+.navbar {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    line-height:50px;
+    background-color: #1285ff;
+    padding: 5px;
+    margin: 15px 12px;
+    border-radius: 20px;
+}
+nav li:first-child{
+    margin-right: auto;
+    margin-left: 40px;
+    display: flex;
+}
+nav li:nth-child(5){
+    display: flex;
+}
+nav li:nth-child(7){
+    display: none;
+}
+.logo{
+    width:50px;
+    border-radius: 50%;
+}
+.navbarprofile{
+    width: 35px;
+    border-radius: 50%;
+}
+
+.navbar li {
+    margin-left: 20px;
+}
+
+.navbar li a  {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding:5px 10px;
+}
+
+ .btn {
+    background-color: #2c2c2cec;
+    border-radius: 10px;
+    margin: 10px;
+}
+#navbar{
+    display: none;
+}
+.navbar li a:hover  {
+    font-weight:bold;
+ }
+.navbar li a:active {  
+    font-weight: bolder;
+}
+.container {
+    padding: 0 20px;
+}
+
+.activitiesEngne {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+h1 {
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.search-bar {
+    margin-top: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    margin: 10px 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+#progress-button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.progress-in-progress {
+    background-color: rgb(7, 7, 195);
+}
+@media (max-width: 768px) {
+   
+
+    .navbar li {
+        margin-left: 0;
+        margin-bottom: 5px;
+    }
+
+    .activitiesEngne {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        justify-content: flex-start;
+    }
+
+    .search-bar input {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 800px) {
+    nav li:nth-child(7){
+    display: flex;
+}
+.logo{
+   margin-bottom: 28px;
+}
+.humburgerMenu{
+    margin-bottom: 10px;
+    margin-right: 15px;
+}
+.navbar {
+    padding-right:10px;
+    margin: 10px 5px;
+    border-radius: 20px;
+    height: 60px;
+}
+.EmployeeViewBar{
+    display: none;
+}
+.navbarprofile{
+    display: none;  
+}
+#navbarprofile{
+    display: flex;
+}
+#navbar {
+    position: fixed;
+    top:0;
+    right:0;
+    height:100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px black;
+    display: none;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+nav li:first-child{
+    margin-right: auto;
+    margin-left: 30px;
+    margin-top: 20px;
+    display: flex;
+}
+.navbar li{
+    padding-top: 10px;
+}
+.navbar li a  {
+    color:black;
+    font-size: larger;
+    text-decoration: none;
+    padding:5px 10px;
+    padding: 0 80px;
+}
+nav li a:nth-child(6){
+    padding: 0 50px;
+}
+.btn {
+    background-color: transparent;
+    margin-left:0px;
+}
+#navbarprofile{
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 80px;
+    margin-top:20px;
+}
+}
