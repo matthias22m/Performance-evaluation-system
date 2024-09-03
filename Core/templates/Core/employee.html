@@ -6,19 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Employee</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/empstyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Increase the weight of label text */
-        label {
-            font-weight: bold; /* Change to desired weight (e.g., 600, 700) */
-        }
-
-        /* Make input fields slightly rounded */
-        input.form-control {
-            border-radius: 5px; /* Adjust this value for more or less roundness */
-        }
-    </style>
 </head>
 <body>
 
@@ -28,7 +17,7 @@
         <h2 class="mb-4">Add Employee</h2>
         <form>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 mb-4">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter Name...">
                 </div>
