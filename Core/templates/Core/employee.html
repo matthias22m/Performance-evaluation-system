@@ -1,16 +1,45 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>employee</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
 </head>
 <body>
-    {% include 'core/navbar.html' %} 
+
+    {% include 'core/navbar.html' %}
     
+    <div class="container mt-5">
+        <h2 class="mb-4">Add Employee</h2>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Name...">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone...">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email...">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="jobCategory">Job Category</label>
+                    <input type="text" class="form-control" id="jobCategory" placeholder="Enter Job Category...">
+                </div>
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+        </form>
+    </div>
+
 </body>
 </html>
