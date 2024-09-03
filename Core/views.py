@@ -9,8 +9,7 @@ from .models import Plan
 from .forms import PlanForm
 # Create your views here.
 
-def index(request):
-    return render(request,'index.html')
+
 
 def profile(request):
     return render(request,'employee-profile.html')

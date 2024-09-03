@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/leader_page.css' %}">
+
+
+<div class="activity-info">
+    <div class="activity-name">
+        <label for="activity-name">Activity Name:</label>
+        <input type="text" id="activity-name" placeholder="Add activity">
+    </div>
+
+    <div class="deadline">
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline">
+    </div>
+
+    <div class="description">
+        <label for="description">Description:</label>
+        <textarea id="description" placeholder="Description..."></textarea>
+    </div>
+
+    <button class="add-btn">Add</button>
+</div>
+
+<h4 class='list'>List of Activities:</h4>
+
+<div class="list-activity">
+    <table class="activity-table">
+        <thead>
+            <tr>
+                <th>Activity Name</th>
+                <th>Deadline</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Project-1</td>
+                <td>2024-9-2</td>
+                <td><button class="edit-btn">edit</button></td>
+                <td><button class="delete-btn">delete</button></td>
+            </tr>
+            <tr>
+                <td>Project-2</td>
+                <td>2024-9-7</td>
+                <td><button class="edit-btn">edit</button></td>
+                <td><button class="delete-btn">delete</button></td>
+            </tr>
+            <tr>
+                <td>Project-3</td>
+                <td>2024-7-4</td>
+                <td><button class="edit-btn">edit</button></td>
+                <td><button class="delete-btn">delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="submit-btn">Submit</button>
+</div>
+
+{% endblock %}
