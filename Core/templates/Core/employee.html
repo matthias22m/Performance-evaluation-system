@@ -62,17 +62,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         document.getElementById('employeeForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
+            event.preventDefault();
             var name = document.getElementById('name').value.trim();
             var phone = document.getElementById('phone').value.trim();
             var email = document.getElementById('email').value.trim();
             var jobCategory = document.getElementById('jobCategory').value.trim();
             var evaluationResult = document.getElementById('evaluationResult').value.trim();
             var sex = document.querySelector('input[name="sex"]:checked');
-
             var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            var phonePattern = /^\d+$/;
-
+            var phonePattern = /^\+\d+$/;
+            var numberPattern = /^\d+$/; 
             if (name === "") {
                 alert("Please enter a name.");
                 return;
@@ -82,7 +81,7 @@
                 return;
             }
             if (!phonePattern.test(phone)) {
-                alert("Please enter a valid phone number (digits only).");
+                alert("Please enter a valid phone number starting with '+' followed by digits.");
                 return;
             }
             if (email === "") {
@@ -99,6 +98,10 @@
             }
             if (evaluationResult === "") {
                 alert("Please enter an evaluation result.");
+                return;
+            }
+            if (!numberPattern.test(evaluationResult)) {
+                alert("Evaluation result must be a number.");
                 return;
             }
             if (!sex) {
