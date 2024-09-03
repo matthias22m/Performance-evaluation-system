@@ -1,100 +1,80 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Activities Dashboard</title>
-    <link rel="stylesheet" href="{% static 'Users/activitiesStyle.css' %}" />
-    <script src="{% static 'Users/activitiesPage.js' %}" defer></script>
-  </head>
-  <body>
-    <nav>
-      <ul class="navbar">
-        <li>
-          <img src="{% static 'Users/assets/download.png' %}" class="logo" />
-        </li>
-        <li class="EmployeeViewBar"><a href="#">Home</a></li>
-        <li class="EmployeeViewBar"><a href="#">Activities</a></li>
-        <li class="EmployeeViewBar"><a href="#">Evaluation</a></li>
-        <li class="EmployeeViewBar">
-          <img src="{{employee_image.image.url}}" class="navbarprofile" />
-        </li>
-        <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
-        <li class="humburgerMenu" onclick="showitems()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="34px"
-            viewBox="0 -960 960 960"
-            width="34px"
-            fill="#FFFFFF"
-          >
-            <path
-              d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-            />
-          </svg>
-        </li>
-      </ul>
-      <ul class="navbar" id="navbar">
-        <li onclick="hideItmes()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="34px"
-            viewBox="0 -960 960 960"
-            width="34px"
-            fill="#FFFFFF"
-          >
-            <path
-              d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
-            />
-          </svg>
-        </li>
-        <li>
-          <img
-            src="{{employee_image.image.url}}"
-            alt="Profile Picture"
-            class="navbarprofile"
-            id="navbarprofile"
-          />
-        </li>
-        __________________________
-        <li onclick="hideItmes()"><a href="#">Home</a></li>
-        <li onclick="hideItmes()"><a href="#">Activities</a></li>
-        <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
-        <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
-      </ul>
-    </nav>
-    <div class="container">
-      <div class="activitiesEngne">
-        <h1>Activities</h1>
-        <div class="search-bar">
-          <input type="text" id="search" placeholder="Search activities" />
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activities Dashboard</title>
+  <link rel="stylesheet" href="{% static 'Users/activitiesStyle.css' %}" />
+  <script src="{% static 'Users/activitiesPage.js' %}" defer></script>
+</head>
+
+<body>
+  <nav>
+    <ul class="navbar">
+      <li>
+        <img src="{% static 'Users/assets/download.png' %}" class="logo" />
+      </li>
+      <li class="EmployeeViewBar"><a href="/profile">Home</a></li>
+      <li class="EmployeeViewBar"><a href="/activities">Activities</a></li>
+      <li class="EmployeeViewBar"><a href="/evaluation">Evaluation</a></li>
+      <li class="EmployeeViewBar">
+        <img src="{{employee_image.image.url}}" class="navbarprofile" />
+      </li>
+      <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
+      <li class="humburgerMenu" onclick="showitems()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF">
+          <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+        </svg>
+      </li>
+    </ul>
+    <ul class="navbar" id="navbar">
+      <li onclick="hideItmes()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="34px" viewBox="0 -960 960 960" width="34px" fill="#FFFFFF">
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+      </li>
+      <li>
+        <img src="{{employee_image.image.url}}" alt="Profile Picture" class="navbarprofile" id="navbarprofile" />
+      </li>
+      __________________________
+      <li onclick="hideItmes()"><a href="#">Home</a></li>
+      <li onclick="hideItmes()"><a href="#">Activities</a></li>
+      <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
+      <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="activitiesEngne">
+      <h1>Activities</h1>
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Search activities" />
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Deadline</th>
-            <th>Progress</th>
-          </tr>
-        </thead>
-        <tbody id="activityList">
-          <tr>
-            <td>Project-X</td>
-            <td>2000-05-10</td>
-            <td>
-              <button
-                class="progress-in-progress"
-                id="progress-button"
-                onclick="progress()"
-              >
-                in-progress
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </body>
+    <table>
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Deadline</th>
+          <th>Progress</th>
+        </tr>
+      </thead>
+      {%for activite in activities%}
+      <tbody id="activityList">
+        <tr>
+          <td>{{activite.activity}}</td>
+          <td>{{activite.deadline}}</td>
+          <td>
+            <button class="progress-in-progress" id="progress-button" onclick="progress()">
+              in-progress
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      {%endfor%}
+    </table>
+  </div>
+</body>
+
 </html>
