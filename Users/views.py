@@ -4,9 +4,6 @@ from .forms import EmployeeRegisterForm
 from django.contrib.auth.decorators import login_required
 from .models import Employee, Profile, Group
 from Core.models import CharacterEvaluation
-
-
-
 def register(request):
     if request.method == 'POST':
         form = EmployeeRegisterForm(request.POST)
@@ -33,5 +30,5 @@ def EmployeeView(request):
         "employee_group":employee_group,
         "total_evaluation":total_evaluation
     }
-    return render(request, 'Users/example.html', context)
+    return render(request, 'Users/homePage.html', context)
 
