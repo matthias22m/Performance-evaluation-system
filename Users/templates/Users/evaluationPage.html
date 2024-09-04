@@ -42,13 +42,18 @@
     <div class="evaluation-container">
         <h2>Evaluate:</h2>
         <label for="group-member">Group Member:</label>
-        <select id="group-member">
-            <option>Select Member........</option>
-            <option>software devloper team</option>
-        </select>
-
         <form action="" method="post">
             {%csrf_token%}
+
+            <select name="selection" id="selection">
+                <option>Select Member........</option>
+                {%for emp in employees%}
+                <option value="{{emp.id}}">{{emp.first_name}} {{emp.last_name}}</option>
+                {%endfor%}
+                <!-- <option>software devloper team</option> -->
+            </select>
+
+
             <table>
                 <thead>
                     <tr>
@@ -64,53 +69,54 @@
                         <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
                             placeholder="0-100%"></td> -->
                         <td>25%</td>
-                        <td><input type="number" id="percentage" name="first_list" min="1" max="4" step="1"
+                        <td><input type="number" id="first_id" name="first_list" min="1.0" max="4.0" step="0.01"
                                 placeholder="1-5" required></td>
                         <td class="total">1.25</td>
+
                     </tr>
                     <tr>
                         <td>ብቃቱን ለማሳደግ የሚያደርገው ጥረት</td>
-                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
+                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="0.01"
                             placeholder="0-100%"></td> -->
                         <td>20%</td>
-                        <td><input type="number" id="percentage" name="second_list" min="1" max="4" step="1"
+                        <td><input type="number" id="percentage" name="second_list" min="1.0" max="4.0" step="0.01"
                                 placeholder="1-5" required></td>
                         <td>1.25</td>
                     </tr>
                     <tr>
                         <td>ለተገልጋዩ የሚሰጠው ክብርና በማገልገሉ የሚሰማው ኩራት</td>
-                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
+                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="0.01"
                             placeholder="0-100%"></td> -->
                         <td>15%</td>
-                        <td><input type="number" id="percentage" name="third_list" min="1" max="4" step="1"
+                        <td><input type="number" id="percentage" name="third_list" min="1.0" max="4.0" step="0.01"
                                 placeholder="1-5" required></td>
                         <td>1.25</td>
                     </tr>
                     <tr>
                         <td>ሌሎችን ለመደገፍና ለማብቃት የሚያደርገው ጥረት</td>
-                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
+                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="0.01"
                             placeholder="0-100%"></td> -->
                         <td>15%</td>
-                        <td><input type="number" id="percentage" name="fourth_list" min="1" max="4" step="1"
+                        <td><input type="number" id="percentage" name="fourth_list" min="1.0" max="4.0" step="0.01"
                                 placeholder="1-5" required></td>
                         <td>1.25</td>
                     </tr>
                     <tr>
                         <td>አሠራሩን ለማሻሻልና በኢኮቴ ለማስደገፍ የሚያደርገው ጥረትና ዝንባሌ</td>
-                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
+                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="0.01"
                             placeholder="0-100%"></td> -->
                         <td>15%</td>
-                        <td><input type="number" id="percentage" name="fifth_list" min="1" max="4" step="1"
+                        <td><input type="number" id="percentage" name="fifth_list" min="1.0" max="4.0" step="0.01"
                                 placeholder="1-5" required></td>
                         <td>1.25</td>
                     </tr>
                     <tr>
                         <td>የአፈፃፀም ግብረ መልስ በወቅቱና በአግባቡ የመስጠትና የመቀበል ዝንባሌ</td>
-                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="1"
+                        <!-- <td><input type="number" id="percentage" name="percentage" min="0" max="100" step="0.01"
                             placeholder="0-100%"></td> -->
                         <td>10%</td>
-                        <td><input type="number" id="percentage" name="sixth_list" min="1" max="4" step="1"
-                                placeholder="1-5" required></td>
+                        <td><input type="number" id="percentage" name="sixth_list" min="1.0" max="4.0" placeholder="1-5"
+                                step="0.01" required></td>
                         <td>1.25</td>
                     </tr>
                 </tbody>

@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import EmployeeRegisterForm
@@ -48,16 +49,34 @@ def list_activities(request):
 
 
 def Evaluation(request):
+    
+    user = request.user
+    
+    target_employee = get_object_or_404(Employee, id=user.id)
+    characterEvaluation=CharacterEvaluation.objects.all()
+    employee_group = target_employee.group.all().first()
+    contexts={"employees":employee_group.employee.all()}
     if request.method=='POST':
-        percent=5
-        first_result=(percent*int(request.POST.get('first_list'))*25)/400
-        second_result=(percent*int(request.POST.get('second_list'))*20)/400
-        third_result=(percent*int(request.POST.get('third_list'))*15)/400
-        fourth_result=(percent*int(request.POST.get('fourth_list'))*15)/400
-        fifth_result=(percent*int(request.POST.get('fifth_list'))*15)/400
-        sixth_result=(percent*int(request.POST.get('sixth_list'))*10)/400
+        evaluated_id=int(request.POST.get("selection"))
+        
+        if evaluated_id==user.id:
+            evaluated_user_id=user.id
+            percent=5
+        else:
+            evaluated_user_id=get_object_or_404(Employee, id=evaluated_id).id
+            percent=15
+            
+        first_result=(percent*float(request.POST.get('first_list'))*25)/400
+        second_result=(percent*float(request.POST.get('second_list'))*20)/400
+        third_result=(percent*float(request.POST.get('third_list'))*15)/400
+        fourth_result=(percent*float(request.POST.get('fourth_list'))*15)/400
+        fifth_result=(percent*float(request.POST.get('fifth_list'))*15)/400
+        sixth_result=(percent*float(request.POST.get('sixth_list'))*10)/400
         total=first_result+second_result+third_result+fourth_result+fifth_result+sixth_result
         print(total)
-        print(first_result,second_result,third_result,fourth_result,fifth_result,sixth_result)
         
-    return render(request,'Users/evaluationPage.html')
+        
+        
+        
+        
+    return render(request,'Users/evaluationPage.html',contexts)
