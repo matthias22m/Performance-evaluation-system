@@ -1,156 +1,154 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Activities</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script>
-        let currentEditRow = null;
-
-        function loadActivities() {
-            const activities = JSON.parse(localStorage.getItem('activities')) || [];
-            const tableBody = document.getElementById('activity-list');
-            tableBody.innerHTML = '';
-
-            activities.forEach((activity, index) => {
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>${activity.name}</td>
-                    <td>${activity.deadline}</td>
-                    <td>
-                        <button class="btn btn-info btn-sm btn-custom"     style="border-radius: 25px; width:60px" onclick="editActivity(this, ${index})">edit</button>
-                        <button class="btn btn-danger btn-sm btn-custom"  style="border-radius: 25px; width:60px"  onclick="deleteActivity(this)">delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(newRow);
-            });
-
-            updateActivityListMessage();
-        }
-
-        function addActivity(event) {
-            event.preventDefault();
-            const activityName = document.getElementById('activity-name').value;
-            const deadline = document.getElementById('deadline').value;
-
-            if (!activityName || !deadline) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            const activities = JSON.parse(localStorage.getItem('activities')) || [];
-
-            if (currentEditRow) {
-                const index = currentEditRow.dataset.index;
-                activities[index].name = activityName;
-                activities[index].deadline = deadline;
-                currentEditRow = null; 
-                document.querySelector('button[type="submit"]').innerText = 'Add';
-            } else {
-                activities.push({ name: activityName, deadline: deadline });
-            }
-
-            localStorage.setItem('activities', JSON.stringify(activities));
-            loadActivities();
-            // Clear input fields
-            document.getElementById('activity-name').value = '';
-            document.getElementById('deadline').value = '';
-        }
-
-        function editActivity(button, index) {
-            currentEditRow = button.closest('tr'); 
-            currentEditRow.dataset.index = index; 
-            const activityName = currentEditRow.cells[0].innerText;
-            const deadline = currentEditRow.cells[1].innerText;
-
-            document.getElementById('activity-name').value = activityName;
-            document.getElementById('deadline').value = deadline;
-            const addButton = document.querySelector('button[type="submit"]');
-            addButton.innerText = 'Update';
-        }
-
-        function deleteActivity(button) {
-            if (confirm('Are you sure you want to delete this activity?')) {
-                const row = button.closest('tr');
-                const activities = JSON.parse(localStorage.getItem('activities')) || [];
-                const index = row.dataset.index;
-
-                activities.splice(index, 1);
-                localStorage.setItem('activities', JSON.stringify(activities));
-                loadActivities();
-            }
-        }
-
-        function updateActivityListMessage() {
-            const tableBody = document.getElementById('activity-list');
-            const messageRow = document.getElementById('no-activities-message');
-
-            if (tableBody.rows.length === 0) {
-                messageRow.style.display = '';
-            } else {
-                messageRow.style.display = 'none'; 
-            }
-        }
-
-        window.onload = loadActivities;
-    </script>
-</head>
-<body>
-
-    {% include 'core/navbar.html' %} 
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    {% include 'core/navbar.html' %}
 
     <div class="container mt-4">
-        <h1 class="mb-4">Activity</h1>
-        <form method="post" action="{% url 'add_activity' %}" class="mb-4" onsubmit="addActivity(event)">
-            {% csrf_token %}
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="activity-name">Activity Name:</label>
-                        <input type="text" class="form-control" id="activity-name" name="activity_name" placeholder="Add Activity....." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Description....."></textarea>
-                    </div>
-                </div>
-                <div class="col-md-4" style="margin-left: 270px;">
-                    <div class="form-group">
-                        <label for="deadline">Deadline Date:</label>
-                        <input type="date" class="form-control" id="deadline" name="deadline" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="assign_person">Assign person:</label>
-                        <select class="form-control" id="assign_person" name="assign_person">
-                            <option value="">Select a person</option>
-                            <option value="1">Fenet</option>
-                            <option value="2">fen</option>
-                        </select>
-                    </div>
-                </div>
+      <h1 class="mb-4">Activity</h1>
+      <form
+        method="post"
+        action="{% url 'subactivity' %}"
+        class="mb-4"
+        onsubmit="addActivity(event)"
+      >
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="activity-weight">Activity Weight:</label>
+              <input
+                type="number"
+                class="form-control activity-weight"
+                id="activity-weight"
+                name="weight"
+                placeholder="Add Weight..."
+                required
+              />
             </div>
-            <button type="submit" class="btn btn-primary btn-custom"  style="border-radius: 25px; width:90px">Add</button>
-        </form>
+            <div class="form-group">
+              <label for="activity-description">Activity Description:</label>
+              <textarea
+                class="form-control activity-description"
+                id="activity-description"
+                name="activity"
+                rows="4"
+                placeholder="activity-description....."
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-md-4" style="margin-left: 270px">
+            <div class="form-group">
+              <label for="deadline">Deadline Date:</label>
+              <input
+                type="date"
+                class="form-control activity-deadline"
+                id="deadline"
+                name="deadline"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="assign_employee">Assign Employee:</label>
+              <select
+                class="form-control activity-employee"
+                id="assign_employee"
+                name="employee"
+                required
+              >
+                <option value="">Select a Employee</option>
+                {% for emp in employees %}
+                <option value="{{emp.id}}">
+                  {{emp.first_name}} {{emp.last_name}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="unit">Assign Employee:</label>
+              <select
+                class="form-control activity-unit"
+                id="assign_employee"
+                name="unit"
+                value="{{unit}}"
+              >
+                <option value="{{unit.id}}" selected>{{unit.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-custom"
+          style="border-radius: 25px; width: 90px"
+        >
+          Add
+        </button>
+      </form>
 
-        <h3 class="mb-4 text-primary " style="font-size: 20px;">List of Activities:</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Activity Name</th>
-                    <th>Deadline</th>
-                    <th>Edit/Delete</th>
-                </tr>
-            </thead>
-            <tbody id="activity-list">
-                <tr id="no-activities-message" style="display: none;">
-                    <td colspan="3">No activity added.</td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit" class="btn btn-primary btn-custom"  style="border-radius: 25px; width:90px">Submit</button>
-
+      <h3 class="mb-4 text-primary" style="font-size: 20px">
+        List of Activities:
+      </h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Activity Name</th>
+            <th>Employee</th>
+            <th>Deadline</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody id="activity-list">
+          {% for activity in subactivities %}
+          <tr>
+            <td>{{activity.activity}}</td>
+            <td>
+              {{activity.employee.first_name}} {{activity.employee.last_name}}
+            </td>
+            <td>{{activity.deadline}}</td>
+            <td>
+              <form
+                action="{% url 'edit_subactivity' activity.id %}"
+                method="put"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-info btn-sm btn-custom"
+                  style="border-radius: 25px; width: 60px"
+                >
+                  edit
+                </button>
+              </form>
+              <form
+                action="{% url 'delete_subactivity' activity.id %}"
+                method="put"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-sm btn-custom"
+                  style="border-radius: 25px; width: 60px"
+                >
+                  delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %} {% if subactivities is None %}
+          <tr id="no-activities-message">
+            <td colspan="3">No activity added.</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
     </div>
-</body>
+  </body>
 </html>
