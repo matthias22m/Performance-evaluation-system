@@ -23,6 +23,8 @@
                 <label for="employee-select">Add Member</label>
                 <select id="employee-select" class="form-control">
                     <option>Select Employee.....</option>
+                    <option>Fenet</option>
+                    <option>fen</option>
                 </select>
             </div>
             <button class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
@@ -34,9 +36,11 @@
                 <tr>
                     <th>Group Name</th>
                     <th>Members</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="group-list">
+
             </tbody>
         </table>
     </div>
@@ -45,9 +49,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const createBtn = document.getElementById('create-btn');
             const groupList = document.getElementById('group-list');
-            let currentEditRow = null;
-
- 
             const loadGroups = () => {
                 const groups = JSON.parse(localStorage.getItem('groups')) || [];
                 groups.forEach(group => {
@@ -55,10 +56,13 @@
                 });
             };
 
-            const addGroupRow = (groupName) => {
+
+            const addGroupRow = (group) => {
                 const newRow = document.createElement('tr');
+                const members = group.members.join(', ');
                 newRow.innerHTML = `
-                    <td>${groupName}</td>
+                    <td>${group.name}</td>
+                    <td>${members}</td>
                     <td class="group-actions">
                         <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                         <button class="btn btn-primary btn-sm edit-btn">Edit</button>
@@ -68,40 +72,46 @@
             };
             const saveGroups = () => {
                 const rows = groupList.querySelectorAll('tr');
-                const groups = Array.from(rows).map(row => row.firstChild.textContent);
+                const groups = Array.from(rows).map(row => {
+                    const name = row.querySelector('td:first-child').textContent;
+                    const members = row.querySelector('td:nth-child(2)').textContent.split(', ').filter(Boolean);
+                    return { name, members };
+                });
                 localStorage.setItem('groups', JSON.stringify(groups));
             };
-
             createBtn.addEventListener('click', function () {
                 const groupName = document.getElementById('group-name').value;
-                if (groupName) {
+                const selectedMember = document.getElementById('employee-select').value;
+                
+                if (groupName && selectedMember !== 'Select Employee.....') {
                     if (currentEditRow) {
-                        currentEditRow.querySelector('td:first-child').textContent = groupName;
-                        createBtn.textContent = 'Create'; 
-                        currentEditRow = null; 
+                        const groupCell = currentEditRow.querySelector('td:first-child');
+                        const membersCell = currentEditRow.querySelector('td:nth-child(2)');
+                        groupCell.textContent = groupName;
+                        membersCell.textContent = membersCell.textContent ? membersCell.textContent + ', ' + selectedMember : selectedMember;
+                        createBtn.textContent = 'Create';
+                        currentEditRow = null;
                     } else {
-                        
-                        addGroupRow(groupName);
+                        addGroupRow({ name: groupName, members: [selectedMember] });
                     }
                     document.getElementById('group-name').value = '';
-                    saveGroups(); 
+                    document.getElementById('employee-select').selectedIndex = 0;
+                    saveGroups();
                 }
             });
-
             groupList.addEventListener('click', function (e) {
                 if (e.target.classList.contains('delete-btn')) {
                     const row = e.target.closest('tr');
                     row.remove();
-                    saveGroups(); 
+                    saveGroups();
                 } else if (e.target.classList.contains('edit-btn')) {
                     const row = e.target.closest('tr');
                     const groupCell = row.querySelector('td:first-child');
-                    document.getElementById('group-name').value = groupCell.textContent; 
+                    document.getElementById('group-name').value = groupCell.textContent;
                     currentEditRow = row;
                     createBtn.textContent = 'Update';
                 }
             });
-
             loadGroups();
         });
     </script>
