@@ -87,6 +87,8 @@ class CharacterEvaluation(models.Model):
     behavior_four = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     behavior_five = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     behavior_six = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    result = models.FloatField(default=0)
+
 
     def __str__(self):
         return f'Evaluation for {self.employee.first_name} by {self.evaluator.last_name}'
