@@ -8,70 +8,99 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .form-container {
-            max-width: 400px; /* Adjust width as needed */
-            margin: 0 auto; /* Center the form */
+        .centered-form {
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
         }
+        .centered-form input,
+        .centered-form select {
+            border-radius: 10px;
+        }
+        .centered-form button {
+            min-width: 70px;
+            width: 100%;
+            border-radius: 25px;
+        }
+        .form-title {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .form-title + hr {
+            border-top: 1px solid #ccc;
+        }
+        .group-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .group-actions button {
+            margin-left: 5px;
+            border-radius: 25px;
+            width: 78px;
+        }
+        th:last-child, 
+        td:last-child {
+            text-align: right;
+            
+        }
+        
+        
     </style>
 </head>
 
 <body>
+    {% include 'core/navbar.html' %}
 
-{% include 'core/navbar.html' %}
-
-<div class="container mt-4">
-    <h2 class="text-center">Group Management:</h2>
-    <div class="form-container">
-        <form>
+    <div class="container mt-5">
+        <h2 class="form-title">Group Management:</h2>
+        <hr>
+        <div class="centered-form">
             <div class="form-group">
-                <label for="groupName">Group</label>
-                <input type="text" class="form-control" id="groupName" placeholder="Group Name...">
+                <label for="group-name">Group</label>
+                <input type="text" id="group-name" class="form-control" placeholder="Group Name.....">
             </div>
             <div class="form-group">
-                <label for="memberSelect">Add Member</label>
-                <select class="form-control" id="memberSelect">
-                    <option>Select Employee...</option>
-                    <option>Select Employee...</option>
-                   
+                <label for="employee-select">Add Member</label>
+                <select id="employee-select" class="form-control">
+                    <option>Select Employee.....</option>
+                    
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Create</button>
-        </form>
+            <button class="btn btn-primary" style="width: 78px;">Create</button>
+        </div>
+
+        <h3>List of Groups:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Group Name</th>
+                    <th>Members</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Backend</td>
+                    <td class="group-actions">
+                        <button class="btn btn-danger btn-sm">delete</button>
+                        <button class="btn btn-primary btn-sm">Members</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Frontend</td>
+                    <td class="group-actions">
+                        <button class="btn btn-danger btn-sm">delete</button>
+                        <button class="btn btn-primary btn-sm">Members</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Testers</td>
+                    <td class="group-actions">
+                        <button class="btn btn-danger btn-sm">delete</button>
+                        <button class="btn btn-primary btn-sm">Members</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <h3 class="mt-4 text-center">List of Groups:</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Group Name</th>
-                <th>Members</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Backend</td>
-                <td>
-                    <button class="btn btn-danger">delete</button>
-                    <span class="badge badge-primary">Members</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Frontend</td>
-                <td>
-                    <button class="btn btn-danger">delete</button>
-                    <span class="badge badge-primary">Members</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Testers</td>
-                <td>
-                    <button class="btn btn-danger">delete</button>
-                    <span class="badge badge-primary">Members</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
 </body>
 </html>
