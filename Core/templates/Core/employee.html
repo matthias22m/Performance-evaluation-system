@@ -15,25 +15,26 @@
     
     <div class="container mt-5">
         <h2 class="mb-4">Add Employee</h2>
-        <form id="employeeForm">
+        <form id="employeeForm" method="post" action="">
+            {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Name...">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name...">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone...">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone...">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Email...">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email...">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="jobCategory">Job Category</label>
-                    <input type="text" class="form-control" id="jobCategory" placeholder="Enter Job Category...">
+                    <input type="text" class="form-control" id="jobCategory" name="job_category" placeholder="Enter Job Category...">
                 </div>
             </div>
             <div class="form-row">
@@ -50,7 +51,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="evaluationResult">Evaluation Result</label>
-                    <input type="text" class="form-control" id="evaluationResult" placeholder="Enter Evaluation Result...">
+                    <input type="text" class="form-control" id="evaluationResult" name="evaluation_result" placeholder="Enter Evaluation Result...">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Add Employee</button>
@@ -60,58 +61,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.getElementById('employeeForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var name = document.getElementById('name').value.trim();
-            var phone = document.getElementById('phone').value.trim();
-            var email = document.getElementById('email').value.trim();
-            var jobCategory = document.getElementById('jobCategory').value.trim();
-            var evaluationResult = document.getElementById('evaluationResult').value.trim();
-            var sex = document.querySelector('input[name="sex"]:checked');
-            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            var phonePattern = /^\+\d+$/;
-            var numberPattern = /^\d+$/;
-
-            if (name === "") {
-                alert("Please enter a name.");
-                return;
-            }
-            if (phone === "") {
-                alert("Please enter a phone number.");
-                return;
-            }
-            if (!phonePattern.test(phone)) {
-                alert("Please enter a valid phone number starting with '+' followed by digits.");
-                return;
-            }
-            if (email === "") {
-                alert("Please enter an email address.");
-                return;
-            }
-            if (!emailPattern.test(email)) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-            if (jobCategory === "") {
-                alert("Please enter a job category.");
-                return;
-            }
-            if (evaluationResult === "") {
-                alert("Please enter an evaluation result.");
-                return;
-            }
-            if (!numberPattern.test(evaluationResult)) {
-                alert("Evaluation result must be a number.");
-                return;
-            }
-            if (!sex) {
-                alert("Please select the sex.");
-                return;
-            }
-
-            alert("Form submitted successfully!");
-        });
-    </script>
 </body>
 </html>

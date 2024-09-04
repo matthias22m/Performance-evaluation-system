@@ -15,19 +15,23 @@
         <h2 class="form-title">Group Management:</h2>
         <hr>
         <div class="centered-form">
-            <div class="form-group">
-                <label for="group-name">Group</label>
-                <input type="text" id="group-name" class="form-control" placeholder="Group Name.....">
-            </div>
-            <div class="form-group">
-                <label for="employee-select">Add Member</label>
-                <select id="employee-select" class="form-control">
-                    <option>Select Employee.....</option>
-                    <option>Fenet</option>
-                    <option>fen</option>
-                </select>
-            </div>
-            <button class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="group-name">Group</label>
+                    <input type="text" id="group-name" name="group_name" class="form-control" placeholder="Group Name.....">
+                </div>
+                <div class="form-group">
+                    <label for="employee-select">Add Member</label>
+                    <select id="employee-select" name="member" class="form-control">
+                        <option>Select Employee.....</option>
+                        <option>Fenet</option>
+                        <option>Fen</option>
+                     
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
+            </form>
         </div>
 
         <h3>List of Groups:</h3>
@@ -40,7 +44,17 @@
                 </tr>
             </thead>
             <tbody id="group-list">
-
+                <!-- Render existing groups from the backend -->
+                {% for group in groups %}
+                <tr>
+                    <td>{{ group.name }}</td>
+                    <td>{{ group.members|join:", " }}</td>
+                    <td class="group-actions">
+                        <button class="btn btn-danger btn-sm delete-btn" data-group-id="{{ group.id }}">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-btn" data-group-id="{{ group.id }}">Edit</button>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -49,70 +63,29 @@
         document.addEventListener('DOMContentLoaded', function () {
             const createBtn = document.getElementById('create-btn');
             const groupList = document.getElementById('group-list');
-            const loadGroups = () => {
-                const groups = JSON.parse(localStorage.getItem('groups')) || [];
-                groups.forEach(group => {
-                    addGroupRow(group);
-                });
-            };
 
-
-            const addGroupRow = (group) => {
-                const newRow = document.createElement('tr');
-                const members = group.members.join(', ');
-                newRow.innerHTML = `
-                    <td>${group.name}</td>
-                    <td>${members}</td>
-                    <td class="group-actions">
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                    </td>
-                `;
-                groupList.appendChild(newRow);
-            };
-            const saveGroups = () => {
-                const rows = groupList.querySelectorAll('tr');
-                const groups = Array.from(rows).map(row => {
-                    const name = row.querySelector('td:first-child').textContent;
-                    const members = row.querySelector('td:nth-child(2)').textContent.split(', ').filter(Boolean);
-                    return { name, members };
-                });
-                localStorage.setItem('groups', JSON.stringify(groups));
-            };
-            createBtn.addEventListener('click', function () {
-                const groupName = document.getElementById('group-name').value;
+            createBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const form = e.target.closest('form');
+                const groupName = document.getElementById('group-name').value.trim();
                 const selectedMember = document.getElementById('employee-select').value;
-                
+
                 if (groupName && selectedMember !== 'Select Employee.....') {
-                    if (currentEditRow) {
-                        const groupCell = currentEditRow.querySelector('td:first-child');
-                        const membersCell = currentEditRow.querySelector('td:nth-child(2)');
-                        groupCell.textContent = groupName;
-                        membersCell.textContent = membersCell.textContent ? membersCell.textContent + ', ' + selectedMember : selectedMember;
-                        createBtn.textContent = 'Create';
-                        currentEditRow = null;
-                    } else {
-                        addGroupRow({ name: groupName, members: [selectedMember] });
-                    }
-                    document.getElementById('group-name').value = '';
-                    document.getElementById('employee-select').selectedIndex = 0;
-                    saveGroups();
+                    form.submit();
+                } else {
+                    alert('Please fill in all fields.');
                 }
             });
+
             groupList.addEventListener('click', function (e) {
                 if (e.target.classList.contains('delete-btn')) {
-                    const row = e.target.closest('tr');
-                    row.remove();
-                    saveGroups();
+                    const groupId = e.target.getAttribute('data-group-id');
+                    if (confirm('Are you sure you want to delete this group?')) {
+                    }
                 } else if (e.target.classList.contains('edit-btn')) {
-                    const row = e.target.closest('tr');
-                    const groupCell = row.querySelector('td:first-child');
-                    document.getElementById('group-name').value = groupCell.textContent;
-                    currentEditRow = row;
-                    createBtn.textContent = 'Update';
+                    const groupId = e.target.getAttribute('data-group-id');
                 }
             });
-            loadGroups();
         });
     </script>
 </body>
