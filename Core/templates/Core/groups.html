@@ -7,7 +7,7 @@
     <title>Groups</title>
     <link rel="stylesheet" href="{% static 'core/grpstyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
+</head>
 
 <body>
     {% include 'core/navbar.html' %}
@@ -23,10 +23,10 @@
                 <label for="employee-select">Add Member</label>
                 <select id="employee-select" class="form-control">
                     <option>Select Employee.....</option>
-                    
+                    <!-- Employee options should be added here -->
                 </select>
             </div>
-            <button class="btn btn-primary" style="width: 78px;">Create</button>
+            <button class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
         </div>
 
         <h3>List of Groups:</h3>
@@ -37,30 +37,73 @@
                     <th>Members</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="group-list">
                 <tr>
                     <td>Backend</td>
                     <td class="group-actions">
-                        <button class="btn btn-danger btn-sm">delete</button>
-                        <button class="btn btn-primary btn-sm">Members</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Frontend</td>
                     <td class="group-actions">
-                        <button class="btn btn-danger btn-sm">delete</button>
-                        <button class="btn btn-primary btn-sm">Members</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
                     </td>
                 </tr>
                 <tr>
                     <td>Testers</td>
                     <td class="group-actions">
-                        <button class="btn btn-danger btn-sm">delete</button>
-                        <button class="btn btn-primary btn-sm">Members</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const createBtn = document.getElementById('create-btn');
+            const groupList = document.getElementById('group-list');
+            let currentEditRow = null; 
+
+            createBtn.addEventListener('click', function () {
+                const groupName = document.getElementById('group-name').value;
+                if (groupName) {
+                    if (currentEditRow) {
+                    
+                        currentEditRow.querySelector('td:first-child').textContent = groupName;
+                        currentEditRow = null; 
+                    } else {
+     
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                            <td>${groupName}</td>
+                            <td class="group-actions">
+                                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                                <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                            </td>
+                        `;
+                        groupList.appendChild(newRow);
+                    }
+                    document.getElementById('group-name').value = '';
+                }
+            });
+
+            groupList.addEventListener('click', function (e) {
+                if (e.target.classList.contains('delete-btn')) {
+                    const row = e.target.closest('tr');
+                    row.remove(); 
+                } else if (e.target.classList.contains('edit-btn')) {
+                    const row = e.target.closest('tr');
+                    const groupCell = row.querySelector('td:first-child');
+                    document.getElementById('group-name').value = groupCell.textContent; 
+                    currentEditRow = row;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
