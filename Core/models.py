@@ -6,13 +6,15 @@ Employee = get_user_model()
 
 class WorkUnit(models.Model):
     name = models.CharField(max_length=255)
+    position_id = models.CharField(max_length=30, unique=True)
     manager = models.OneToOneField(Employee, on_delete=models.SET_NULL, null=True, related_name='managed_work_units')
 
     def __str__(self):
         return self.name
 
 class Unit(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+    position_id = models.CharField(max_length=30, unique=True)
     unit_leader = models.OneToOneField(Employee, on_delete=models.SET_NULL, null=True, related_name='led_unit')
     work_unit = models.ForeignKey(WorkUnit, on_delete=models.CASCADE, related_name='units')
 

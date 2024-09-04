@@ -1,5 +1,8 @@
-from django.shortcuts import get_object_or_404, render
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
+from django.contrib import messages
+from .models import SubActivity
+from .forms import SubActivityForm
+from django.contrib.auth import get_user_model
 from django import forms
 from .models import Activity
 from django.views.decorators.http import require_POST
@@ -66,3 +69,33 @@ def employee(request):
     return render(request, 'core/employee.html')
 def groups(request):
     return render(request, 'core/groups.html')
+
+Employee = get_user_model()
+
+def subactivity_create(request):
+    if request.method == 'POST':
+        form = SubActivityForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Activity assigned successfully.')
+            return redirect('create_subactivity')
+    else:
+        form = SubActivityForm()
+    return render(request, 'Core/create_subactivity.html', {'form':form})
+
+def subactivity_list(request,pk):
+    subactivities = SubActivity.objects.all()
+    
+    context = {'subactivities':subactivities}
+    
+    return render(request, 'Core/subactivities_list.html', context)
+
+#LIST AND DETAL FOR EMPLOYEES
+def employee_list(request):
+    employees = Employee.objects.all()
+    return render(request, 'employees/employee_list.html', {'employees': employees})
+
+
+def employee_detail(request, id):
+    employee = get_object_or_404(Employee, id=id)
+    return render(request, 'employees/employee_detail.html', {'employee': employee})

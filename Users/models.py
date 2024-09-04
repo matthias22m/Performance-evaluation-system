@@ -1,4 +1,5 @@
 from django.db import models
+from django.apps import apps
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from PIL import Image
 
@@ -26,6 +27,14 @@ class EmployeeManager(BaseUserManager):
 class Employee(AbstractUser):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
+    gender = models.CharField(max_length=1,choices=[('M', 'Male'), ('F', 'Female')],default='M')
+    # unit = models.ForeignKey('Unit',on_delete=models.SET_NULL,null=True,blank=True)
+    unit = models.ForeignKey('Core.Unit', on_delete=models.CASCADE, null=True, blank=True, related_name='employees')
+
+    def get_unit(self):
+        Unit = apps.get_model('Core', 'Unit')
+        return Unit.objects.get(pk=self.unit_id)
+    
     position = models.CharField(max_length=20, null=True, blank= True)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15)
@@ -62,7 +71,7 @@ class Profile(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=255)
-    employee = models.ForeignKey(Employee, related_name='group', on_delete=models.PROTECT)
+    employee = models.ManyToManyField(Employee, related_name='group')
 
     def __str__(self):
         return self.name
