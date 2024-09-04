@@ -5,52 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groups</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/grpstyle.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .centered-form {
-            max-width: 400px;
-            margin: 0 auto;
-            border-radius: 10px;
-        }
-        .centered-form input,
-        .centered-form select {
-            border-radius: 10px;
-        }
-        .centered-form button {
-            min-width: 70px;
-            width: 100%;
-            border-radius: 25px;
-        }
-        .form-title {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-        .form-title + hr {
-            border-top: 1px solid #ccc;
-        }
-        .group-actions {
-            display: flex;
-            justify-content: flex-end;
-        }
-        .group-actions button {
-            margin-left: 5px;
-            border-radius: 25px;
-            width: 78px;
-        }
-        th:last-child, 
-        td:last-child {
-            text-align: right;
-            
-        }
-        
-        
-    </style>
-</head>
+    </head>
 
 <body>
     {% include 'core/navbar.html' %}
-
     <div class="container mt-5">
         <h2 class="form-title">Group Management:</h2>
         <hr>
