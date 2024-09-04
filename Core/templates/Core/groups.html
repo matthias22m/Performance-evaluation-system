@@ -23,8 +23,6 @@
                 <label for="employee-select">Add Member</label>
                 <select id="employee-select" class="form-control">
                     <option>Select Employee.....</option>
-                     <option>fenet</option>
-                     <option>  fen</option>
                 </select>
             </div>
             <button class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
@@ -39,27 +37,6 @@
                 </tr>
             </thead>
             <tbody id="group-list">
-                <tr>
-                    <td>Backend</td>
-                    <td class="group-actions">
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Frontend</td>
-                    <td class="group-actions">
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Testers</td>
-                    <td class="group-actions">
-                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -68,44 +45,64 @@
         document.addEventListener('DOMContentLoaded', function () {
             const createBtn = document.getElementById('create-btn');
             const groupList = document.getElementById('group-list');
-            let currentEditRow = null; // To keep track of the row being edited
+            let currentEditRow = null;
+
+ 
+            const loadGroups = () => {
+                const groups = JSON.parse(localStorage.getItem('groups')) || [];
+                groups.forEach(group => {
+                    addGroupRow(group);
+                });
+            };
+
+            const addGroupRow = (groupName) => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${groupName}</td>
+                    <td class="group-actions">
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-btn">Edit</button>
+                    </td>
+                `;
+                groupList.appendChild(newRow);
+            };
+            const saveGroups = () => {
+                const rows = groupList.querySelectorAll('tr');
+                const groups = Array.from(rows).map(row => row.firstChild.textContent);
+                localStorage.setItem('groups', JSON.stringify(groups));
+            };
 
             createBtn.addEventListener('click', function () {
                 const groupName = document.getElementById('group-name').value;
                 if (groupName) {
                     if (currentEditRow) {
-                        // Update existing group name
                         currentEditRow.querySelector('td:first-child').textContent = groupName;
-                        createBtn.textContent = 'Create'; // Reset button text
-                        currentEditRow = null; // Reset after edit
+                        createBtn.textContent = 'Create'; 
+                        currentEditRow = null; 
                     } else {
-                        // Create new row
-                        const newRow = document.createElement('tr');
-                        newRow.innerHTML = `
-                            <td>${groupName}</td>
-                            <td class="group-actions">
-                                <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                                <button class="btn btn-primary btn-sm edit-btn">Edit</button>
-                            </td>
-                        `;
-                        groupList.appendChild(newRow);
+                        
+                        addGroupRow(groupName);
                     }
-                    document.getElementById('group-name').value = ''; // Clear input
+                    document.getElementById('group-name').value = '';
+                    saveGroups(); 
                 }
             });
 
             groupList.addEventListener('click', function (e) {
                 if (e.target.classList.contains('delete-btn')) {
                     const row = e.target.closest('tr');
-                    row.remove(); // Remove the row
+                    row.remove();
+                    saveGroups(); 
                 } else if (e.target.classList.contains('edit-btn')) {
                     const row = e.target.closest('tr');
                     const groupCell = row.querySelector('td:first-child');
-                    document.getElementById('group-name').value = groupCell.textContent; // Populate input for editing
-                    currentEditRow = row; // Store the row being edited
-                    createBtn.textContent = 'Update'; // Change button text to "Update"
+                    document.getElementById('group-name').value = groupCell.textContent; 
+                    currentEditRow = row;
+                    createBtn.textContent = 'Update';
                 }
             });
+
+            loadGroups();
         });
     </script>
 </body>
