@@ -7,12 +7,10 @@ urlpatterns = [
     path('employee/', views.employee, name='employee'),      
     path('evaluation/', views.evaluation, name='evaluation'),
     path('logout/', views.logout_view, name='logout'),   
-    path('activities/add/', views.add_activity, name='add_activity'),
-    path('activities/edit/<int:id>/', views.edit_activity, name='edit_activity'),
-    path('activities/delete/<int:id>/', views.delete_activity, name='delete_activity'), 
-    path('subactivity_create/', views.subactivity_create, name='create_subactivity'),
-    path('subactivity_list/', views.subactivity_list, name='subactivity_list'),
-    path('', views.employee_list, name='employee_list'),
+    # path('activities/add/', views.add_activity, name='add_activity'),
+    path('subactivity/edit/<int:id>/', views.edit_subactivity, name='edit_subactivity'),
+    path('subactivity/delete/<int:id>/', views.delete_subactivity, name='delete_subactivity'), 
+    path('subactivity/', views.subactivity_view, name='subactivity'),
     path('employee/<int:id>/', views.employee_detail, name='employee_detail')
 ]
 
