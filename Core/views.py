@@ -51,6 +51,10 @@ def evaluation(request):
 
 def logout_view(request):
     return render(request, 'core/logout.html')
+def employee(request):
+    return render(request, 'core/employee.html')
+def groups(request):
+    return render(request, 'core/groups.html')
 
 Employee = get_user_model()
 

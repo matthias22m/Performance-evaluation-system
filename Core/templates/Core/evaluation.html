@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation</title>
+    <link rel="stylesheet" href="{% static 'core/evstyle.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    {% include 'core/navbar.html' %}
+
+    <div class="container mt-5">
+        <h2 class="form-title">Evaluate:</h2>
+        <hr class="mb-5">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <label for="group-select">Group</label>
+                    <select id="group-select" name="group" class="form-control">
+                        <option value="">Select Group...</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="designer">Designer</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="member-select">Group Member</label>
+                    <select id="member-select" name="member" class="form-control">
+                        <option value="">Select Member...</option>
+                        <option value="fayisa">Dr. Fayisa</option>
+                        <option value="kebede">Mr. Kebede</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Weight in %</th>
+                        <th>Weight</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tsebayu endet nw?</td>
+                        <td>
+                            <select class="form-control" name="criteria1_weight">
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" name="criteria1_score">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Seat akbari new?</td>
+                        <td>
+                            <select class="form-control" name="criteria2_weight">
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control" name="criteria2_score">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="submit-container">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
