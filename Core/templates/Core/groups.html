@@ -23,7 +23,8 @@
                 <label for="employee-select">Add Member</label>
                 <select id="employee-select" class="form-control">
                     <option>Select Employee.....</option>
-                    <!-- Employee options should be added here -->
+                     <option>fenet</option>
+                     <option>  fen</option>
                 </select>
             </div>
             <button class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
@@ -67,17 +68,18 @@
         document.addEventListener('DOMContentLoaded', function () {
             const createBtn = document.getElementById('create-btn');
             const groupList = document.getElementById('group-list');
-            let currentEditRow = null; 
+            let currentEditRow = null; // To keep track of the row being edited
 
             createBtn.addEventListener('click', function () {
                 const groupName = document.getElementById('group-name').value;
                 if (groupName) {
                     if (currentEditRow) {
-                    
+                        // Update existing group name
                         currentEditRow.querySelector('td:first-child').textContent = groupName;
-                        currentEditRow = null; 
+                        createBtn.textContent = 'Create'; // Reset button text
+                        currentEditRow = null; // Reset after edit
                     } else {
-     
+                        // Create new row
                         const newRow = document.createElement('tr');
                         newRow.innerHTML = `
                             <td>${groupName}</td>
@@ -88,19 +90,20 @@
                         `;
                         groupList.appendChild(newRow);
                     }
-                    document.getElementById('group-name').value = '';
+                    document.getElementById('group-name').value = ''; // Clear input
                 }
             });
 
             groupList.addEventListener('click', function (e) {
                 if (e.target.classList.contains('delete-btn')) {
                     const row = e.target.closest('tr');
-                    row.remove(); 
+                    row.remove(); // Remove the row
                 } else if (e.target.classList.contains('edit-btn')) {
                     const row = e.target.closest('tr');
                     const groupCell = row.querySelector('td:first-child');
-                    document.getElementById('group-name').value = groupCell.textContent; 
-                    currentEditRow = row;
+                    document.getElementById('group-name').value = groupCell.textContent; // Populate input for editing
+                    currentEditRow = row; // Store the row being edited
+                    createBtn.textContent = 'Update'; // Change button text to "Update"
                 }
             });
         });
