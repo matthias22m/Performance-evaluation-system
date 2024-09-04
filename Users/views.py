@@ -56,6 +56,8 @@ def Evaluation(request):
     characterEvaluation=CharacterEvaluation.objects.all()
     employee_group = target_employee.group.all().first()
     contexts={"employees":employee_group.employee.all()}
+
+    
     if request.method=='POST':
         evaluated_id=int(request.POST.get("selection"))
         
@@ -75,6 +77,9 @@ def Evaluation(request):
         total=first_result+second_result+third_result+fourth_result+fifth_result+sixth_result
         print(total)
         
+
+
+
         
         
         
