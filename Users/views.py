@@ -1,4 +1,4 @@
-import datetime
+from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import EmployeeRegisterForm
@@ -27,8 +27,14 @@ def EmployeeView(request):
     employee_group = target_employee.group.all().first()
     activities=SubActivity.objects.all()
 
-    # evaluations = CharacterEvaluation.objects.get(id = user.id)
-    # total_evaluation = evaluations.behavior_one + evaluations.behavior_two + evaluations.behavior_three + evaluations.behavior_four + evaluations.behavior_five + evaluations.behavior_six
+    evaluations = CharacterEvaluation.objects.filter(id=user.id).values()
+    avr, sum = 0,0
+    for i in evaluations:
+        avr += 1
+        sum += i['result']
+        print(i['result'])
+        print(sum)
+
     context = {
         "target_employee": target_employee,
         "employee_image":employee_image,
@@ -36,6 +42,7 @@ def EmployeeView(request):
         # "total_evaluation":total_evaluation,
         "employees":employee_group.employee.all(),
         'activities':activities
+        
     }
     return render(request, 'Users/homePage.html', context)
 
@@ -73,10 +80,21 @@ def Evaluation(request):
         fifth_result=(percent*float(request.POST.get('fifth_list'))*15)/400
         sixth_result=(percent*float(request.POST.get('sixth_list'))*10)/400
         total=first_result+second_result+third_result+fourth_result+fifth_result+sixth_result
-        print(total)
         
         
+        evaluation = CharacterEvaluation(
+            employee=target_employee,
+            evaluator=get_object_or_404(Employee, id=evaluated_user_id),
+            evaluation_date=date.today(),  # Set the current date as the evaluation date
+            behavior_one=first_result,
+            behavior_two=second_result,
+            behavior_three=third_result,
+            behavior_four=fourth_result,
+            behavior_five=fifth_result,
+            behavior_six=sixth_result,
+            result=total
+        )
         
-        
+        evaluation.save()
         
     return render(request,'Users/evaluationPage.html',contexts)
