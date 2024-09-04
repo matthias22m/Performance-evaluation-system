@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Employee, Profile, Group
 from Core.models import CharacterEvaluation
 from Core.models import SubActivity
+
+
 def register(request):
     if request.method == 'POST':
         form = EmployeeRegisterForm(request.POST)
@@ -23,48 +25,40 @@ def EmployeeView(request):
     user = request.user
     target_employee = get_object_or_404(Employee, id=user.id)
     employee_image = Profile.objects.filter(id = user.id).first()
-    recent_activities = SubActivity.objects.filter(employee=target_employee).values()
     employee_group = target_employee.group.all().first()
     activities=SubActivity.objects.all()
 
-    evaluations = CharacterEvaluation.objects.filter(id=user.id).values()
-    avr, sum = 0,0
-    for i in evaluations:
-        avr += 1
-        sum += i['result']
-        print(i['result'])
-        print(sum)
+    others_evaluations = CharacterEvaluation.objects.filter(employee=user.id).exclude(evaluator = user.id)
+    own_evaluations = CharacterEvaluation.objects.filter(employee=user.id,evaluator = user.id)
+
+    counter, sum = 0,0
+    for i in others_evaluations:
+        counter += 1
+        sum += i.result
+    others_evaluations_average = sum/counter
 
     context = {
         "target_employee": target_employee,
         "employee_image":employee_image,
         "employee_group":employee_group,
-        # "total_evaluation":total_evaluation,
         "employees":employee_group.employee.all(),
-        'activities':activities
-        
+        'activities':activities,
+        "others_evaluations_average":others_evaluations_average,
+        "own_evaluations":own_evaluations     
     }
     return render(request, 'Users/homePage.html', context)
 
 
-
 def list_activities(request):
-    activities=SubActivity.objects.all()
-    
+    activities=SubActivity.objects.all()   
     return render(request,'Users/activitiesPage.html',{'activities':activities})
 
 
-
-def Evaluation(request):
-    
-    user = request.user
-    
-    target_employee = get_object_or_404(Employee, id=user.id)
-    characterEvaluation=CharacterEvaluation.objects.all()
-    employee_group = target_employee.group.all().first()
+def Evaluation(request):   
+    user = request.user 
+    employee_group = user.group.all().first()
     contexts={"employees":employee_group.employee.all()}
 
-    
     if request.method=='POST':
         evaluated_id=int(request.POST.get("selection"))
         
@@ -72,7 +66,7 @@ def Evaluation(request):
             evaluated_user_id=user.id
             percent=5
         else:
-            evaluated_user_id=get_object_or_404(Employee, id=evaluated_id).id
+            evaluated_user_id=evaluated_id
             percent=15
             
         first_result=(percent*float(request.POST.get('first_list'))*25)/400
@@ -85,9 +79,9 @@ def Evaluation(request):
         
         
         evaluation = CharacterEvaluation(
-            employee=target_employee,
-            evaluator=get_object_or_404(Employee, id=evaluated_user_id),
-            evaluation_date=date.today(),  # Set the current date as the evaluation date
+            employee=get_object_or_404(Employee, id=evaluated_user_id),
+            evaluator=user,
+            evaluation_date=date.today(),
             behavior_one=first_result,
             behavior_two=second_result,
             behavior_three=third_result,

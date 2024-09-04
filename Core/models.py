@@ -91,6 +91,6 @@ class CharacterEvaluation(models.Model):
 
 
     def __str__(self):
-        return f'Evaluation for {self.employee.first_name} by {self.evaluator.last_name}'
+        return f'Evaluation for {self.employee.first_name} by {self.evaluator.first_name}'
 
 
