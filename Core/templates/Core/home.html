@@ -7,6 +7,12 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<style>
+    .row .card {
+        border-radius: 10px;
+        background-color: rgb(255, 255, 255);
+    }
+</style>
 
 <body>
     {% include 'core/navbar.html' %}
@@ -55,7 +61,7 @@
                         <p class="card-text">Casual Plan</p>
                     </div>
                 </div>
-                <a href="{% url 'all_plans' %}" class="text-primary">All Plans &rarr;</a> <!-- Updated link -->
+                <a href="{% url 'all_plans' %}" class="text-primary">All Plans &rarr;</a>
             </div>
         </div>
     </div>

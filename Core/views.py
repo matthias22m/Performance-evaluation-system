@@ -31,7 +31,7 @@ class ActivityForm(forms.ModelForm):
      #   deadline=deadline,
      #   assigned_person=assigned_person
    # )
-   # return redirect('activity_list')
+    #return redirect('activity_list')
 def home(request):
     return render(request,'core/home.html')
 #     Activity.objects.create(
@@ -68,7 +68,6 @@ def all_employees(request):
     return render(request, 'core/all-employ.html') 
 def add_employee(request):
     return render(request, 'core/add_emp.html')
-
 
 
 Employee = get_user_model()
