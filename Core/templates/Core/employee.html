@@ -10,13 +10,20 @@
         .container .btn {
             border-radius: 50px;
         }
+        .container .form-control{
+            border-radius: 40px;
+        }
     </style>
 </head>
 <body>
     {% include 'core/navbar.html' %}
     
     <div class="container">
-        <h1 class="mb-5">Employee Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <h1 class="mb-0">Employee Management</h1>
+            <input type="text" name="search" class="form-control" style="width: 250px;" placeholder="Search employees..." required>
+        </div>
+        <hr class="mb-5">
 
         <table class="table table-bordered">
             <thead>
@@ -27,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-           <tr>
+                <tr>
                     <td>Dr. Feyisa</td>
                     <td>+251912345678</td>
                     <td>
