@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     font-size:medium;
-    background-color: rgb(218, 218, 218);
+    background-color: rgb(255, 255, 255);
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -63,6 +63,36 @@ nav li:nth-child(7){
 #navbar{
     display:none;
 }
+.container {
+    margin-left: 30px;
+    text-align: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+#result {
+    display: none;
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #0056b3;
+}
 main {
     padding: 10px 20px;
     overflow: hidden;
@@ -78,6 +108,7 @@ main {
     width: 170px;
     height: 170px;
     margin-right: 20px;
+    box-shadow: 4px 4px 1px rgb(142, 139, 139);
 }
 
 .profile-info {
@@ -93,9 +124,8 @@ margin-bottom:20px;}
     margin-top: 20px;
     width:92vw;
     display: flex;
-    justify-content:space-between;
+    justify-content:space-around;
     overflow: hidden;
-    margin-left:0;
 }
 h2{margin-bottom:12px;}
 .activity, .member {
@@ -103,9 +133,10 @@ h2{margin-bottom:12px;}
     padding: 10px;
     border-radius: 5px;
     width: 480px;
-    height: 90px;
+    height: auto;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .activity h3, .member h3 {
@@ -125,6 +156,11 @@ a:hover {
 }
  p{
     margin:0;
+}
+@media (max-width:400px) {
+    .container {
+        width: auto;
+    }  
 }
 @media (max-width: 800px) {
     nav li:nth-child(7){
@@ -151,6 +187,7 @@ a:hover {
 }
 #navbarprofile{
     display: flex;
+    box-shadow: 0 4px 20px  #fd0339;
 }
 #navbar {
     position: fixed;
@@ -201,7 +238,6 @@ nav li a:nth-child(6){
 @media (max-width: 1094px) {
     .activity, .member {
         width: 80vw;
-        height: 80px;
         width: 300px;
     }
 }
