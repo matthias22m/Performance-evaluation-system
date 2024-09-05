@@ -117,8 +117,9 @@
             <td>{{activity.deadline}}</td>
             <td>
               <form
+                class="d-inline"
                 action="{% url 'edit_subactivity' activity.id %}"
-                method="put"
+                method="post"
               >
                 <button
                   type="submit"
@@ -129,6 +130,8 @@
                 </button>
               </form>
               <form
+                id="delete-subactivity"
+                class="d-inline"
                 action="{% url 'delete_subactivity' activity.id %}"
                 method="put"
               >
@@ -150,5 +153,17 @@
         </tbody>
       </table>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        deleteForm = document.getElementById('delete-subactivity')
+        deleteForm.addEventListener('submit', (e) => {
+          e.preventDefault()
+          const conf = confirm('Are you sure to delete this activity?')
+          if(conf){
+            deleteForm.submit()
+          }
+        })
+      });
+    </script>
   </body>
 </html>
