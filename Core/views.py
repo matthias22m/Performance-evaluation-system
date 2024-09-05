@@ -46,13 +46,12 @@ def add_activity(request):
         assigned_person=assigned_person
     )
     return redirect('activity_list')
+def home(request):
+    return render(request,'core/home.html')
 
 def activities_list(request):
     activities = Activity.objects.all()
     return render(request, 'activities/list.html', {'activities': activities})
-
-def index(request):
-    return render(request, 'core/index.html')
 
 def activities(request):
     return render(request, 'core/activities.html')
