@@ -73,6 +73,9 @@ def all_plans(request):
 
 def all_employees(request):
     return render(request, 'core/all-employ.html') 
+def add_employee(request):
+    return render(request, 'core/add_emp.html')
+
 
 Employee = get_user_model()
 
