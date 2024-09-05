@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="refresh" content="2" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static "core/navbarr.css" %}">
+
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <img src="{% static "core/logo.png" %}" alt="astu Logo" class="logo">
+    <div class="links">
+      <ul>
+          <li class="link"><a href="{% url "home" %}">Home</a></li>
+          <li class="link"><a href="{% url "employee" %}">Employee</a></li>
+          <li class="link"><a href="{% url "groups" %}">Groups</a></li>
+          <li class="link"><a href="{% url "activities" %}">Activities</a></li>
+          <li class="link"><a href="{% url "evaluation" %}">Evaluation</a></li>
+      </ul>
+
+          <img src="{% static "core/profile.png" %}" alt="profile">
+          <a href="{% url "logout" %}" class="btn">Logout</a>
+    </div>
+  </nav>
+</body>
+</html>
