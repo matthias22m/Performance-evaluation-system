@@ -68,6 +68,11 @@ def employee(request):
     return render(request, 'core/employee.html')
 def groups(request):
     return render(request, 'core/groups.html')
+def all_plans(request):
+    return render(request, 'core/plan.html')
+
+def all_employees(request):
+    return render(request, 'core/all-employ.html') 
 
 Employee = get_user_model()
 
