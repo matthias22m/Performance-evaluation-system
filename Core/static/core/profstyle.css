@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.profile-container {
+    margin: 50px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.profile-info {
+    margin-top: 20px;
+}
+
+.profile-info p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+.evaluation-result {
+    font-weight: bold;
+}

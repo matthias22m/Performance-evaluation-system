@@ -24,6 +24,15 @@ from .decorators import position_required
 #     deadline = request.POST.get('deadline')
 #     assigned_person = request.POST.get('assign_person')
 
+   # Activity.objects.create(
+    #    name=activity_name,
+    #    description=description,
+     #   deadline=deadline,
+     #   assigned_person=assigned_person
+   # )
+    #return redirect('activity_list')
+def home(request):
+    return render(request,'core/home.html')
 #     Activity.objects.create(
 #         name=activity_name,
 #         description=description,
@@ -35,9 +44,6 @@ from .decorators import position_required
 # def activities_list(request):
 #     activities = Activity.objects.all()
 #     return render(request, 'activities/list.html', {'activities': activities})
-
-def index(request):
-    return render(request, 'core/index.html')
 
 def activities(request):
     return render(request, 'core/activities.html')
@@ -52,6 +58,14 @@ def employee(request):
     return render(request, 'core/employee.html')
 def groups(request):
     return render(request, 'core/groups.html')
+def all_plans(request):
+    return render(request, 'core/plan.html')
+
+def all_employees(request):
+    return render(request, 'core/all-employ.html') 
+def add_employee(request):
+    return render(request, 'core/add_emp.html')
+
 
 Employee = get_user_model()
 

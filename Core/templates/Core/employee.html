@@ -1,65 +1,58 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Employee</title>
-    <link rel="stylesheet" href="{% static 'core/empstyle.css' %}">
+    <title>Employee Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container .btn {
+            border-radius: 50px;
+        }
+        .container .form-control{
+            border-radius: 40px;
+        }
+    </style>
 </head>
 <body>
-
     {% include 'core/navbar.html' %}
     
-    <div class="container mt-5">
-        <h2 class="mb-4">Add Employee</h2>
-        <form id="employeeForm" method="post" action="">
-            {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-4">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name...">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone...">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email...">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="jobCategory">Job Category</label>
-                    <input type="text" class="form-control" id="jobCategory" name="job_category" placeholder="Enter Job Category...">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="sex">Sex</label><br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sex" id="male" value="male">
-                        <label class="form-check-label" for="male">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sex" id="female" value="female">
-                        <label class="form-check-label" for="female">Female</label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="evaluationResult">Evaluation Result</label>
-                    <input type="text" class="form-control" id="evaluationResult" name="evaluation_result" placeholder="Enter Evaluation Result...">
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Employee</button>
-        </form>
-    </div>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+            <h1 class="mb-0">Employee Management</h1>
+            <input type="text" name="search" class="form-control" style="width: 250px;" placeholder="Search employees..." required>
+        </div>
+        <hr class="mb-5">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dr. Feyisa</td>
+                    <td>+251912345678</td>
+                    <td>
+                        <button class="btn btn-primary">Profile</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mr. Girma</td>
+                    <td>+251912345679</td>
+                    <td>
+                        <button class="btn btn-primary">Profile</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'add_emp' %}" class="btn btn-primary">Add New Employee</a>
+    </div>
 </body>
 </html>
