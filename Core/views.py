@@ -16,7 +16,7 @@ def home(request):
 def units(request):
     return render(request,'Core/units.html')
 def plan(request):
-    return render(request,'plan.html')
+    return render(request,'Core/plan.html')
 
 def activities(request):
     return render(request,'activities.html')
@@ -24,7 +24,6 @@ def activities(request):
 
 def evaluation(request):
     return render(request,'evaluation.html')
-
 def unit_create(request):
     if request.method == 'POST':
         form = UnitForm(request.POST)
