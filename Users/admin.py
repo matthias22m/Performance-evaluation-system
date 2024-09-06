@@ -12,13 +12,13 @@ class EmployeeAdmin(BaseUserAdmin):
     
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'phone_number', 'position', 'job_title', 'salary')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'unit', 'gender','phone_number', 'position', 'job_title', 'salary')}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser', 'is_active', 'groups', 'user_permissions')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'phone_number', 'position', 'job_title', 'salary', 'password1', 'password2', 'is_staff', 'is_superuser'),
+            'fields': ('email', 'first_name', 'last_name', 'unit', 'gender', 'phone_number', 'position', 'job_title', 'salary', 'password1', 'password2', 'is_staff', 'is_superuser'),
         }),
     )
     search_fields = ('email', 'first_name', 'last_name')

@@ -1,0 +1,38 @@
+
+.centered-form {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.centered-form input,
+.centered-form select {
+    border-radius: 10px;
+}
+.centered-form button {
+    min-width: 70px;
+    width: 100%;
+    border-radius: 25px;
+}
+.form-title {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.form-title + hr {
+    border-top: 1px solid #ccc;
+}
+.group-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+.group-actions button {
+    margin-left: 5px;
+    border-radius: 25px;
+    width: 78px;
+}
+th:last-child, 
+td:last-child {
+    text-align: right;
+    
+}
+        
+  

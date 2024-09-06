@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Activities</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    {% include 'core/navbar.html' %}
+
+    <div class="container mt-4">
+      <h1 class="mb-4">Activity</h1>
+      <form
+        method="post"
+        action="{% url 'subactivity' %}"
+        class="mb-4"
+        onsubmit="addActivity(event)"
+      >
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="activity-weight">Activity Weight:</label>
+              <input
+                type="number"
+                class="form-control activity-weight"
+                id="activity-weight"
+                name="weight"
+                placeholder="Add Weight..."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="activity-description">Activity Description:</label>
+              <textarea
+                class="form-control activity-description"
+                id="activity-description"
+                name="activity"
+                rows="4"
+                placeholder="activity-description....."
+              ></textarea>
+            </div>
+          </div>
+          <div class="col-md-4" style="margin-left: 270px">
+            <div class="form-group">
+              <label for="deadline">Deadline Date:</label>
+              <input
+                type="date"
+                class="form-control activity-deadline"
+                id="deadline"
+                name="deadline"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="assign_employee">Assign Employee:</label>
+              <select
+                class="form-control activity-employee"
+                id="assign_employee"
+                name="employee"
+                required
+              >
+                <option value="">Select a Employee</option>
+                {% for emp in employees %}
+                <option value="{{emp.id}}">
+                  {{emp.first_name}} {{emp.last_name}}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="unit">Assign Employee:</label>
+              <select
+                class="form-control activity-unit"
+                id="assign_employee"
+                name="unit"
+                value="{{unit}}"
+              >
+                <option value="{{unit.id}}" selected>{{unit.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-custom"
+          style="border-radius: 25px; width: 90px"
+        >
+          Add
+        </button>
+      </form>
+
+      <h3 class="mb-4 text-primary" style="font-size: 20px">
+        List of Activities:
+      </h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Activity Name</th>
+            <th>Employee</th>
+            <th>Deadline</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody id="activity-list">
+          {% for activity in subactivities %}
+          <tr>
+            <td>{{activity.activity}}</td>
+            <td>
+              {{activity.employee.first_name}} {{activity.employee.last_name}}
+            </td>
+            <td>{{activity.deadline}}</td>
+            <td>
+              <form
+                class="d-inline"
+                action="{% url 'edit_subactivity' activity.id %}"
+                method="post"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-info btn-sm btn-custom"
+                  style="border-radius: 25px; width: 60px"
+                >
+                  edit
+                </button>
+              </form>
+              <form
+                id="delete-subactivity"
+                class="d-inline"
+                action="{% url 'delete_subactivity' activity.id %}"
+                method="put"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-sm btn-custom"
+                  style="border-radius: 25px; width: 60px"
+                >
+                  delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %} {% if subactivities is None %}
+          <tr id="no-activities-message">
+            <td colspan="3">No activity added.</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        deleteForm = document.getElementById('delete-subactivity')
+        deleteForm.addEventListener('submit', (e) => {
+          e.preventDefault()
+          const conf = confirm('Are you sure to delete this activity?')
+          if(conf){
+            deleteForm.submit()
+          }
+        })
+      });
+    </script>
+  </body>
+</html>

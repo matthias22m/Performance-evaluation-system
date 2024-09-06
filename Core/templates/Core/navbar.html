@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="10000" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'core/navbar.css' %}" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <img src="{% static 'core/logo.png' %}" alt="astu Logo" class="logo" />
+      <div class="links">
+        <ul>
+          <li class="link">
+            <a
+              href="{% url 'home' %}"
+              class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+              >Home</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'employees' %}"
+              class="{% if request.resolver_match.url_name == 'employees' %}active{% endif %}"
+              >Employee</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'groups' %}"
+              class="{% if request.resolver_match.url_name == 'groups' %}active{% endif %}"
+              >Groups</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'subactivity' %}"
+              class="{% if request.resolver_match.url_name == 'subactivity' %}active{% endif %}"
+              >Activities</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'evaluation' %}"
+              class="{% if request.resolver_match.url_name == 'evaluation' %}active{% endif %}"
+              >Evaluation</a
+            >
+          </li>
+        </ul>
+
+        <img src="{% static 'core/profile.png' %}" alt="profile" />
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+          <button type="submmit" class="logout">Logout</button>
+        </form>
+      </div>
+    </nav>
+  </body>
+</html>

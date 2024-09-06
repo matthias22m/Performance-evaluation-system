@@ -1,19 +1,20 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
-
 Employee = get_user_model()
  
 
 class WorkUnit(models.Model):
     name = models.CharField(max_length=255)
+    position_id = models.CharField(max_length=30, unique=True)
     manager = models.OneToOneField(Employee, on_delete=models.SET_NULL, null=True, related_name='managed_work_units')
 
     def __str__(self):
         return self.name
 
 class Unit(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+    position_id = models.CharField(max_length=30, unique=True)
     unit_leader = models.OneToOneField(Employee, on_delete=models.SET_NULL, null=True, related_name='led_unit')
     work_unit = models.ForeignKey(WorkUnit, on_delete=models.CASCADE, related_name='units')
 
@@ -80,7 +81,7 @@ behavior_six => የአፈፃፀም ግብረ መልስ በወቅቱና በአግ
 class CharacterEvaluation(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='evaluations')
     evaluator = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='given_evaluations')
-    evaluation_date = models.DateField()
+    evaluation_date = models.DateField(auto_now=True)
     behavior_one = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     behavior_two = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     behavior_three = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
@@ -88,9 +89,10 @@ class CharacterEvaluation(models.Model):
     behavior_five = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     behavior_six = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
     result = models.FloatField(default=0)
-
+    
+    class Meta:
+        unique_together = ('evaluator', 'employee')
 
     def __str__(self):
         return f'Evaluation for {self.employee.first_name} by {self.evaluator.first_name}'
-
 
