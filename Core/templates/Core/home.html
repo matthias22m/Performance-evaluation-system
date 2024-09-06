@@ -4,10 +4,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta http-equiv="refresh" content="10000">
+  <link rel="stylesheet" href="{% static "css/home.css" %}">
+  <title>Home</title>
 </head>
 <body>
   {% include "core/navbar.html" %}
-  <h1>Home</h1>
+  <div class="container">
+      <div class="profile">
+            <div class="profile-img">
+                <img src="{% static "images/leader.jpg" %}" alt="Leader Image" class="prof-img" >
+            </div>
+            <div class="prof-info">
+                <div>
+                    <h2>ALeka Sewye Bertu</h2>
+                    <p class="title">Software Engineer</p>
+                </div>
+                <ul class="details">
+                    <li><strong>Email:</strong> sewyyew@astu.edu.et</li>
+                    <li><strong>Phone:</strong> 0912345678</li>
+                    <li><strong>Position:</strong>Work Unit Leader</span></li>
+                </ul>
+        </div>
+        <div class="units">
+              <h3>Units under Work Unit:</h3>
+              <div class="units-list">
+                  <div class="unit-card">
+                      <h4 class="unit-title">Software Dep.</h4>
+                      <p>Unit Leader: Sewyew Alemu</p>
+                  </div>
+                  <div class="unit-card">
+                      <h4 class="unit-title">Software Dep.</h4>
+                      <p>Unit Leader: Sewyew Alemu</p>
+                  </div>
+                  <div class="unit-card">
+                      <h4 class="unit-title">Software Dep.</h4>
+                      <p>Unit Leader: Sewyew Alemu</p>
+                  </div>
+                  <div class="unit-card">
+                      <h4 class="unit-title">Software Dep.</h4>
+                      <p>Unit Leader: Sewyew Alemu</p>
+                  </div>
+              </div>
+               <a href="#" class="manage-link">Manage Unit →</a>
+          </div>
+      </div>
+
+      </div>
+  </div>
+
 </body>
 </html>
