@@ -25,7 +25,7 @@ nav .logo {
   align-items: center;
   gap: 2rem;
 }
-ul{
+.linkk{
   display: flex;
   justify-content: space-between;
   align-items:center;
@@ -58,6 +58,7 @@ a{
 .logout:active{
   transform: scale(0.9);
 }
-nav div ul li  a.active{
+li  a.active{
   font-weight: 700;
 }
+
