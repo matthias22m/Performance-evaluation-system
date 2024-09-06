@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from .models import SubActivity,CharacterEvaluation
-from .forms import SubActivityForm
+from .forms import SubActivityForm, EmployeeForm
 from django.contrib.auth import get_user_model
 from django import forms
 from django.views.decorators.http import require_POST
@@ -71,10 +71,11 @@ Employee = get_user_model()
 
 @position_required
 def subactivity_view(request):
-    subactivities = SubActivity.objects.all()
     unit = request.user.unit
+    subactivities = None
     employees = None
     if unit is not None:
+        subactivities = SubActivity.objects.filter(unit=unit)
         employees = unit.employees.exclude(email__in=[request.user.email])
 
     
@@ -149,12 +150,27 @@ def evaluation_view(request):
     return render(request, 'core/evaluation.html',context)
 
 #LIST AND DETAL FOR EMPLOYEES
-def employee_list(request):
-    employees = Employee.objects.all()
-    return render(request, 'employees/employee_list.html', {'employees': employees})
+@position_required
+def employee_view(request):
+    unit = request.user.unit
+    employees = None
+    if unit is not None:
+        employees = unit.employees.exclude(email__in=[request.user.email])
+        
+    context = {'employees': employees,}
+    return render(request, 'core/employee.html', context)
 
-
-def employee_detail(request, id):
-    employee = get_object_or_404(Employee, id=id)
-    return render(request, 'employees/employee_detail.html', {'employee': employee})
-    return redirect('subactivity')
+@position_required
+def employee_add(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            employee = form.save(commit=False)
+            employee.unit = request.user.unit
+            employee.save()
+            messages.success(request, f'Employee created successfully.')
+            return redirect('employees')
+    else:
+        form = EmployeeForm()   
+    
+    return render(request, 'core/add_emp.html')
