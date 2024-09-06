@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plans</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container .btn {
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'core/navbar.html' %}
+    
+    <div class="container mt-5">
+        <h2>Plans</h2>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Plan Name</th>
+                    <th>Plan Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Plan X</td>
+                    <td>Annual Plan</td>
+                </tr>
+                <tr>
+                    <td>Project 1</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+                <tr>
+                    <td>PLAN UIUSI</td>
+                    <td>Casual Plan</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+    
+</body>
+</html>

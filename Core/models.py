@@ -81,23 +81,18 @@ behavior_six => የአፈፃፀም ግብረ መልስ በወቅቱና በአግ
 class CharacterEvaluation(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='evaluations')
     evaluator = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='given_evaluations')
-    evaluation_date = models.DateField()
-    behavior_one = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
-    behavior_two = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
-    behavior_three = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
-    behavior_four = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
-    behavior_five = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
-    behavior_six = models.IntegerField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    evaluation_date = models.DateField(auto_now=True)
+    behavior_one = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    behavior_two = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    behavior_three = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    behavior_four = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    behavior_five = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    behavior_six = models.FloatField(default=1,validators=[MinValueValidator(1), MaxValueValidator(4)])
+    result = models.FloatField()
+    
+    class Meta:
+        unique_together = ('evaluator', 'employee')
 
     def __str__(self):
-        return f'Evaluation for {self.employee.name} by {self.evaluator.name}'
+        return f'Evaluation for {self.employee.first_name} by {self.evaluator.first_name}'
 
-
-class Activity(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    deadline = models.DateField()
-    assigned_person = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
