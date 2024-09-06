@@ -1,0 +1,216 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+  background-color: #f5f5f5;
+}
+
+
+.prof-img{
+  width: 15rem;
+  border-radius: 10px;
+  margin-left: 2.5rem;
+}
+.profile{
+  display: flex;
+  justify-content: start;
+}
+.prof-info{
+  padding-left: 30px;
+}
+.details{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+}
+.details li {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.prof-info h2{
+  font-size: 30px;
+  margin:0;
+}
+.prof-info .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.units {
+  margin-top:20rem;
+}
+
+.units h3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.units-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.unit-card {
+  background-color: white;
+  padding:1.3rem 3rem ;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+}
+
+.unit-card .unit-title {
+  color: #007bff;
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.manage-link {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #007bff;
+}
+
+/* Sewyew Responsive */
+@media (max-width: 1200px) {
+  .prof-img {
+      width: 12rem;
+      margin-left: 2rem;
+  }
+
+  .profile {
+      margin-left: 3rem;
+  }
+
+  .prof-info {
+      padding-left: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .prof-img {
+      width: 10rem;
+      margin-left: 1rem;
+  }
+
+  .profile {
+      margin-left: 1rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .prof-info {
+      padding-left: 0;
+  }
+
+  .prof-info h2 {
+      font-size: 24px;
+  }
+
+  .prof-info .title {
+      font-size: 16px;
+  }
+
+  .details li {
+      font-size: 16px;
+  }
+
+  .units {
+      margin-top: 10rem;
+  }
+
+  .units h3 {
+      font-size: 24px;
+  }
+
+  .units-list {
+      grid-template-columns: 1fr;
+  }
+
+  .unit-card {
+      padding: 1rem 1.5rem;
+      font-size: 18px;
+  }
+
+  .unit-card .unit-title {
+      font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .prof-img {
+      width: 8rem;
+  }
+
+  .prof-info h2 {
+      font-size: 20px;
+  }
+
+  .prof-info .title {
+      font-size: 14px;
+  }
+
+  .details li {
+      font-size: 14px;
+  }
+
+  .units {
+      margin-top: 5rem;
+  }
+
+  .units h3 {
+      font-size: 20px;
+  }
+
+  .unit-card {
+      padding: 0.8rem 1rem;
+      font-size: 16px;
+  }
+
+  .unit-card .unit-title {
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .prof-img {
+      width: 6rem;
+  }
+
+  .prof-info h2 {
+      font-size: 18px;
+  }
+
+  .prof-info .title {
+      font-size: 12px;
+  }
+
+  .details li {
+      font-size: 12px;
+  }
+
+  .units {
+      margin-top: 3rem;
+  }
+
+  .units h3 {
+      font-size: 18px;
+  }
+
+  .unit-card {
+      padding: 0.5rem 0.8rem;
+      font-size: 14px;
+  }
+
+  .unit-card .unit-title {
+      font-size: 0.875rem;
+  }
+}
