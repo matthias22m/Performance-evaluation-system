@@ -10,13 +10,13 @@
 </head>
 <body>
   <nav>
-    <img src="{% static "core/logo.png" %}" alt="astu Logo" class="logo">
+    <img src="{% static "images/logo.png" %}" alt="astu Logo" class="logo">
     <div class="links">
       <ul>
-          <li class="link"><a href="{% url "home" %}">Home</a></li>
+          <li class="link"><a href="{% url "home" %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
           {% comment %} <li class="link"><a href="{% url "employee" %}" class="{% if request.resolver_match.url_name == 'employee' %}active{% endif %}">Employee</a></li> {% endcomment %}
-          <li class="link"><a href="{% url "units" %}" >Units</a></li>
-          <li class="link"><a href="{% url "plan" %}">Plan</a></li>
+          <li class="link"><a href="{% url "units" %}" class="{% if request.resolver_match.url_name == 'units' %}active{% endif %}">Units</a></li>
+          <li class="link"><a href="{% url "plan" %}" class="{% if request.resolver_match.url_name == 'plan' %}active{% endif %}">Plan</a></li>
       </ul>
 
           <img src="{% static "core/profile.png" %}" alt="profile">
