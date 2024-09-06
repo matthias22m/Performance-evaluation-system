@@ -2,31 +2,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'core/navbar.css' %}">
+  <meta http-equiv="refresh" content="10000" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static "core/navbar.css" %}">
+
+  <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'core/logo.png' %}" alt="Logo" class="logo">
-        </a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'employees' %}">Employee</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'groups' %}">Groups</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'subactivity' %}">Activities</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'evaluation' %}">Evaluation</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <img src="{% static 'core/profile.png' %}" alt="Profile" class="profile-icon">
-                    </a>
-                </li>
-                <li class="nav-item logout"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
+  <nav>
+    <img src="{% static "core/logo.png" %}" alt="astu Logo" class="logo">
+    <div class="links">
+      <ul>
+          <li class="link"><a href="{% url "home" %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+          <li class="link"><a href="{% url "employee" %}" class="{% if request.resolver_match.url_name == 'employee' %}active{% endif %}">Employee</a></li>
+          <li class="link"><a href="{% url "groups" %}" class="{% if request.resolver_match.url_name == 'groups' %}active{% endif %}">Groups</a></li>
+          <li class="link"><a href="{% url "activities" %}" class="{% if request.resolver_match.url_name == 'activities' %}active{% endif %}">Activities</a></li>
+          <li class="link"><a href="{% url "evaluation" %}" class="{% if request.resolver_match.url_name == 'evaluation' %}active{% endif %}">Evaluation</a></li>
+      </ul>
+
+          <img src="{% static "core/profile.png" %}" alt="profile">
+          <a href="{% url "logout" %}" class="logout">Logout</a>
+    </div>
+  </nav>
 </body>
 </html>
