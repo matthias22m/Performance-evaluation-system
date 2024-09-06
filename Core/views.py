@@ -14,9 +14,9 @@ def home(request):
     return render(request,'Core/home.html')
 
 def units(request):
-    return render(request,)
-def profile(request):
-    return render(request,'employee-profile.html')
+    return render(request,'Core/units.html')
+def plan(request):
+    return render(request,'plan.html')
 
 def activities(request):
     return render(request,'activities.html')
