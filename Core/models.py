@@ -96,12 +96,3 @@ class CharacterEvaluation(models.Model):
     def __str__(self):
         return f'Evaluation for {self.employee.first_name} by {self.evaluator.first_name}'
 
-
-class Activity(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
-    deadline = models.DateField()
-    assigned_person = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name

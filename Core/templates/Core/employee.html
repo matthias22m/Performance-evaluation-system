@@ -24,35 +24,34 @@
             <input type="text" name="search" class="form-control" style="width: 250px;" placeholder="Search employees..." required>
         </div>
         <hr class="mb-5">
-
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Phone</th>
+                    <th>Email</th>
+                    <th>Job Tilte</th>
+                    <th>Gender</th>
                     <th>Edit/Delete</th>
                 </tr>
             </thead>
             <tbody>
+                {% for emp in employees %}
                 <tr>
-                    <td>Dr. Feyisa</td>
-                    <td>+251912345678</td>
+                    <td>{{emp.first_name}} {{emp.last_name}}</td>
+                    <td>{{emp.phone_number}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>{{emp.job_title}}</td>
+                    <td>{{emp.gender}}</td>
                     <td>
                         <button class="btn btn-primary">Profile</button>
                         <button class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Mr. Girma</td>
-                    <td>+251912345679</td>
-                    <td>
-                        <button class="btn btn-primary">Profile</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'add_emp' %}" class="btn btn-primary">Add New Employee</a>
+        <a href="{% url 'add_employee' %}" class="btn btn-primary">Add New Employee</a>
     </div>
 </body>
 </html>
