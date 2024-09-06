@@ -12,7 +12,7 @@
   <nav>
     <img src="{% static "images/logo.png" %}" alt="astu Logo" class="logo">
     <div class="links">
-      <ul>
+      <ul class="linkk">
           <li class="link"><a href="{% url "home" %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
           {% comment %} <li class="link"><a href="{% url "employee" %}" class="{% if request.resolver_match.url_name == 'employee' %}active{% endif %}">Employee</a></li> {% endcomment %}
           <li class="link"><a href="{% url "units" %}" class="{% if request.resolver_match.url_name == 'units' %}active{% endif %}">Units</a></li>
