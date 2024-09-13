@@ -8,6 +8,49 @@
 </head>
 <body>
   {% include "core/navbar.html" %}
-  <h1>Units</h1>
+  <div>
+    <section class="unit-management">
+        <h2>Unit Management:</h2>
+        <div class="unit-form">
+            <label for="add-unit">Add Unit:</label>
+            <input type="text" id="add-unit" placeholder="Add Activity.....">
+
+            <label for="assign-leader">Assign Leader:</label>
+            <input type="text" id="assign-leader" placeholder="Name">
+
+            <button class="add-btn">Add</button>
+        </div>
+    </section>
+
+    <section class="unit-list-section">
+        <h3>List of Unit:</h3>
+        <table class="unit-table">
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Leader</th>
+                    <th>Employee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Software</td>
+                    <td>Sewyew Meta</td>
+                    <td><button class="employee-btn">List of Employee</button></td>
+                </tr>
+                <tr>
+                    <td>CSE</td>
+                    <td>Sewyew Hede</td>
+                    <td><button class="employee-btn">List of Employee</button></td>
+                </tr>
+                <tr>
+                    <td>Network</td>
+                    <td>Sewyew Kere</td>
+                    <td><button class="employee-btn">List of Employee</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
 </body>
 </html>
