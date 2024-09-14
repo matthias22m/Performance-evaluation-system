@@ -20,11 +20,11 @@ def register(request):
         form = EmployeeRegisterForm()
     return render(request, 'users/register.html', {'form':form})
 
-
+@login_required
 def EmployeeView(request):
     user = request.user
     target_employee = get_object_or_404(Employee, id=user.id)
-    employee_image = Profile.objects.filter(id = user.id).first()
+    employee_image = Profile.objects.get(employee = user.id)
     employee_group = target_employee.group.all().first()
     activities=SubActivity.objects.all()
 
@@ -35,29 +35,40 @@ def EmployeeView(request):
     for i in others_evaluations:
         counter += 1
         sum += i.result
-    others_evaluations_average = sum/counter
+    try:
+        others_evaluations_average = sum/counter
+    except ZeroDivisionError:
+        others_evaluations_average = 0
+    
+    employees = None
+    if employee_group is not None:
+        employees = employee_group.employee.all()
 
     context = {
         "target_employee": target_employee,
         "employee_image":employee_image,
         "employee_group":employee_group,
-        "employees":employee_group.employee.all(),
+        "employees":employees,
         'activities':activities,
         "others_evaluations_average":others_evaluations_average,
         "own_evaluations":own_evaluations     
     }
     return render(request, 'Users/homePage.html', context)
 
-
+@login_required
 def list_activities(request):
     activities=SubActivity.objects.all()   
     return render(request,'Users/activitiesPage.html',{'activities':activities})
 
-
+@login_required
 def Evaluation(request):   
     user = request.user 
     employee_group = user.group.all().first()
-    contexts={"employees":employee_group.employee.all()}
+    employees = None
+    if employee_group is not None:
+        employees = employee_group.employee.all()
+        
+    contexts={"employees":employees}
 
     if request.method=='POST':
         evaluated_id=int(request.POST.get("selection"))
