@@ -29,7 +29,7 @@ class Employee(AbstractUser):
     last_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=1,choices=[('M', 'Male'), ('F', 'Female')],default='M')
     # unit = models.ForeignKey('Unit',on_delete=models.SET_NULL,null=True,blank=True)
-    unit = models.ForeignKey('Core.Unit', on_delete=models.CASCADE, null=True, blank=True, related_name='employees')
+    unit = models.ForeignKey('Core.Unit', on_delete=models.PROTECT, null=True, blank=True, related_name='employees')
 
     def get_unit(self):
         Unit = apps.get_model('Core', 'Unit')
@@ -70,6 +70,11 @@ class Profile(models.Model):
                 img.save(self.image.path)
 
 class Group(models.Model):
+    unit = models.ForeignKey('Core.Unit', on_delete=models.CASCADE, null=True, blank=True, related_name='groups')
+
+    def get_unit(self):
+        Unit = apps.get_model('Core', 'Unit')
+        return Unit.objects.get(pk=self.unit_id)
     name = models.CharField(max_length=255)
     employee = models.ManyToManyField(Employee, related_name='group')
 
