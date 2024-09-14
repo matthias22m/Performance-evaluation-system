@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="10000" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'core/navbar.css' %}" />
+    
+
+    {% block extra_css %} {% endblock %}
+    {% block extra_script %}{% endblock %}
+
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <nav>
+      <img src="{% static 'core/logo.png' %}" alt="astu Logo" class="logo" />
+      <div class="links">
+        <ul>
+          <li class="link">
+            <a
+              href="{% url 'home' %}"
+              class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+              >Home</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'employees' %}"
+              class="{% if request.resolver_match.url_name == 'employees' %}active{% endif %}"
+              >Employee</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'groups' %}"
+              class="{% if request.resolver_match.url_name == 'groups' %}active{% endif %}"
+              >Groups</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'subactivity' %}"
+              class="{% if request.resolver_match.url_name == 'subactivity' %}active{% endif %}"
+              >Activities</a
+            >
+          </li>
+          <li class="link">
+            <a
+              href="{% url 'evaluation' %}"
+              class="{% if request.resolver_match.url_name == 'evaluation' %}active{% endif %}"
+              >Evaluation</a
+            >
+          </li>
+        </ul>
+
+        <img src="{% static 'core/profile.png' %}" alt="profile" />
+        <form action="{% url 'logout' %}" method="POST">
+          {% csrf_token %}
+          <button type="submmit" class="logout">Logout</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% if messages %} {% for message in messages %}
+
+      <div class="alert alert-{{message.tag}}">{{ message }}</div>
+
+      {% endfor %} {% endif %} {% block content %}{% endblock %}
+    </div>
+
+    {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
+  </body>
+</html>

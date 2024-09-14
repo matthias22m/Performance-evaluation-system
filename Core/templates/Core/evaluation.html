@@ -1,305 +1,298 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Evaluation</title>
-    <link rel="stylesheet" href="{% static 'core/evstyle.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-  </head>
+{% extends "Core/base.html" %} 
+{% load static %} 
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const behaviorSelects = document.querySelectorAll(".behavior-select");
-      const percentages = [25, 20, 15, 15, 15, 10];
+{% block title %} 
+Evaluation 
+{%endblock %} 
 
-      behaviorSelects.forEach((select, index) => {
-        select.addEventListener("change", function () {
-          const selectedValue = parseInt(this.value);
-          const percentage = percentages[index];
-          const multipliedValue = (percentage * selectedValue * 10) / 400;
+{% block extra_css %}
 
-          this.closest("tr").querySelector(".multiplied-value").textContent =
-            multipliedValue.toFixed(2);
+<link rel="stylesheet" href="{% static 'core/evstyle.css' %}" />
+{% endblock %} 
 
-          updateTotalAndAverageValue();
-        });
-      });
+{% block extra_script %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const behaviorSelects = document.querySelectorAll(".behavior-select");
+    const percentages = [25, 20, 15, 15, 15, 10];
 
-      function updateTotalAndAverageValue() {
-        let total = 0;
-        let avg = 0;
-        const multipliedValues = document.querySelectorAll(".multiplied-value");
-        const selectedValues = document.querySelectorAll(".behavior-select");
-        multipliedValues.forEach((td) => {
-          const value = parseFloat(td.textContent) || 0;
-          avg += value;
-        });
-        selectedValues.forEach((select) => {
-          const value = parseInt(select.value) || 0;
-          total += value;
-        });
+    behaviorSelects.forEach((select, index) => {
+      select.addEventListener("change", function () {
+        const selectedValue = parseInt(this.value);
+        const percentage = percentages[index];
+        const multipliedValue = (percentage * selectedValue * 10) / 400;
 
-        document.getElementById("avg-value").textContent = avg.toFixed(2);
-        document.getElementById("total-value").textContent = total.toFixed(2);
-      }
+        this.closest("tr").querySelector(".multiplied-value").textContent =
+          multipliedValue.toFixed(2);
 
-      evalForm = document.getElementById("eval-form");
-      evalForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const behavior1_score = evalForm.querySelector(
-          'input[name="behavior1_score"]'
-        );
-        const behavior2_score = evalForm.querySelector(
-          'input[name="behavior2_score"]'
-        );
-        const behavior3_score = evalForm.querySelector(
-          'input[name="behavior3_score"]'
-        );
-        const behavior4_score = evalForm.querySelector(
-          'input[name="behavior4_score"]'
-        );
-        const behavior5_score = evalForm.querySelector(
-          'input[name="behavior5_score"]'
-        );
-        const behavior6_score = evalForm.querySelector(
-          'input[name="behavior6_score"]'
-        );
-
-        behavior1_score.value = (behavior1_score.value * 25 * 10) / 400;
-        behavior2_score.value = (behavior2_score.value * 20 * 10) / 400;
-        behavior3_score.value = (behavior3_score.value * 15 * 10) / 400;
-        behavior4_score.value = (behavior4_score.value * 15 * 10) / 400;
-        behavior5_score.value = (behavior5_score.value * 15 * 10) / 400;
-        behavior6_score.value = (behavior6_score.value * 10 * 10) / 400;
-
-        evalForm.submit();
+        updateTotalAndAverageValue();
       });
     });
-  </script>
 
-  <body>
-    {% include 'core/navbar.html' %}
+    function updateTotalAndAverageValue() {
+      let total = 0;
+      let avg = 0;
+      const multipliedValues = document.querySelectorAll(".multiplied-value");
+      const selectedValues = document.querySelectorAll(".behavior-select");
+      multipliedValues.forEach((td) => {
+        const value = parseFloat(td.textContent) || 0;
+        avg += value;
+      });
+      selectedValues.forEach((select) => {
+        const value = parseInt(select.value) || 0;
+        total += value;
+      });
 
-    <div class="container mt-5">
-      <h2 class="form-title">Evaluate:</h2>
-      <hr class="mb-5" />
-      <form id="eval-form" method="post" action="{% url 'evaluation' %}">
-        {% csrf_token %}
-        <div class="row mb-5">
-          <div class="col-md-6">
-            <label for="employee-select">Employee:</label>
-            <select id="employee-select" name="employee" class="form-control">
-              <option value="">Select Employee...</option>
-              {% for emp in employees %}
-              <option value="{{emp.id}}">
-                {{emp.first_name}} {{emp.last_name}}
-              </option>
-              {% endfor %}
-            </select>
-          </div>
-          {% comment %}
-          <div class="col-md-6">
-            <label for="member-select">Group Member</label>
-            <select id="member-select" name="member" class="form-control">
-              <option value="">Select Member...</option>
-              <option value="fayisa">Dr. Fayisa</option>
-              <option value="kebede">Mr. Kebede</option>
-            </select>
-          </div>
-          {% endcomment %}
-        </div>
+      document.getElementById("avg-value").textContent = avg.toFixed(2);
+      document.getElementById("total-value").textContent = total.toFixed(2);
+    }
 
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Behahavior Description</th>
-              <th>Weight in %</th>
-              <th>Implementation Level</th>
-              <th>Multiplied value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ፀረ ኪራይ ሰብሳቢነት፣ አመለካከትና ተግባር ለማስወገድ የሚያሳየው ጥረት</td>
-              <td>25%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior1_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td>ብቃቱን ለማሳደግ የሚያደርገው ጥረት</td>
-              <td>20%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior2_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td>ለተገልጋዩ የሚሰጠው ክብርና በማገልገሉ የሚሰማው ኩራት</td>
-              <td>15%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior3_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td>ሌሎችን ለመደገፍና ለማብቃት የሚያደርገው ጥረት</td>
-              <td>15%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior4_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td>አሠራሩን ለማሻሻልና በኢኮቴ ለማስደገፍ የሚያደርገው ጥረትና ዝንባሌ</td>
-              <td>15%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior5_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td>የአፈፃፀም ግብረ መልስ በወቅቱና በአግባቡ የመስጠትና የመቀበል ዝንባሌ</td>
-              <td>10%</td>
-              <td>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="1"
-                  max="4"
-                  class="form-control behavior-select"
-                  name="behavior6_score"
-                  required
-                />
-              </td>
-              <td class="multiplied-value"></td>
-            </tr>
-            <tr>
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td>Total</td>
-              <td id="avg-value"></td>
-            </tr>
-            <tr>
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td>Average Value</td>
-              <td id="total-value"></td>
-            </tr>
-          </tbody>
-        </table>
+    evalForm = document.getElementById("eval-form");
+    evalForm.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-        <div class="submit-container">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
+      const behavior1_score = evalForm.querySelector(
+        'input[name="behavior1_score"]'
+      );
+      const behavior2_score = evalForm.querySelector(
+        'input[name="behavior2_score"]'
+      );
+      const behavior3_score = evalForm.querySelector(
+        'input[name="behavior3_score"]'
+      );
+      const behavior4_score = evalForm.querySelector(
+        'input[name="behavior4_score"]'
+      );
+      const behavior5_score = evalForm.querySelector(
+        'input[name="behavior5_score"]'
+      );
+      const behavior6_score = evalForm.querySelector(
+        'input[name="behavior6_score"]'
+      );
+
+      behavior1_score.value = (behavior1_score.value * 25 * 10) / 400;
+      behavior2_score.value = (behavior2_score.value * 20 * 10) / 400;
+      behavior3_score.value = (behavior3_score.value * 15 * 10) / 400;
+      behavior4_score.value = (behavior4_score.value * 15 * 10) / 400;
+      behavior5_score.value = (behavior5_score.value * 15 * 10) / 400;
+      behavior6_score.value = (behavior6_score.value * 10 * 10) / 400;
+
+      evalForm.submit();
+    });
+  });
+</script>
+{% endblock %}
+
+{% block content %} 
+<div class="container mt-5">
+  <h2 class="form-title">Evaluate:</h2>
+  <hr class="mb-5" />
+  <form id="eval-form" method="post" action="{% url 'evaluation' %}">
+    {% csrf_token %}
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <label for="employee-select">Employee:</label>
+        <select id="employee-select" name="employee" class="form-control">
+          <option value="">Select Employee...</option>
+          {% for emp in employees %}
+          <option value="{{emp.id}}">
+            {{emp.first_name}} {{emp.last_name}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      {% comment %}
+      <div class="col-md-6">
+        <label for="member-select">Group Member</label>
+        <select id="member-select" name="member" class="form-control">
+          <option value="">Select Member...</option>
+          <option value="fayisa">Dr. Fayisa</option>
+          <option value="kebede">Mr. Kebede</option>
+        </select>
+      </div>
+      {% endcomment %}
     </div>
-    <div class="mb-5"></div>
-    <div class="m-5">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Evaluator</th>
-            <th>Employee</th>
-            <th>Evaluation date</th>
-            <th>result</th>
-            <th>Edit/Delete</th>
-          </tr>
-        </thead>
-        <tbody id="activity-list">
-          {% for eval in evaluations %}
-          <tr>
-            <td>{{eval.evaluator.first_name}} {{eval.evaluator.last_name}}</td>
-            <td>{{eval.employee.first_name}} {{eval.employee.last_name}}</td>
-            <td>{{eval.evaluation_date}}</td>
-            <td>{{eval.result}}</td>
-            <td>
-              <form class="d-inline" action="" method="post">
-                <button
-                  type="submit"
-                  class="btn btn-info btn-sm btn-custom"
-                  style="border-radius: 25px; width: 60px"
-                >
-                  edit
-                </button>
-              </form>
-              <form
-                id="delete-subactivity"
-                class="d-inline"
-                action=""
-                method="put"
-              >
-                <button
-                  type="submit"
-                  class="btn btn-danger btn-sm btn-custom"
-                  style="border-radius: 25px; width: 60px"
-                >
-                  delete
-                </button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %} {% if evaluations is None %}
-          <tr id="no-activities-message">
-            <td colspan="3">No evaluations added.</td>
-          </tr>
-          {% endif %}
-        </tbody>
-      </table>
-    </div>
-    <div class="mb-5"></div>
-    <div class="mb-5"></div>
-    <div class="mb-5"></div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
-</html>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Behahavior Description</th>
+          <th>Weight in %</th>
+          <th>Implementation Level</th>
+          <th>Multiplied value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ፀረ ኪራይ ሰብሳቢነት፣ አመለካከትና ተግባር ለማስወገድ የሚያሳየው ጥረት</td>
+          <td>25%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior1_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td>ብቃቱን ለማሳደግ የሚያደርገው ጥረት</td>
+          <td>20%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior2_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td>ለተገልጋዩ የሚሰጠው ክብርና በማገልገሉ የሚሰማው ኩራት</td>
+          <td>15%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior3_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td>ሌሎችን ለመደገፍና ለማብቃት የሚያደርገው ጥረት</td>
+          <td>15%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior4_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td>አሠራሩን ለማሻሻልና በኢኮቴ ለማስደገፍ የሚያደርገው ጥረትና ዝንባሌ</td>
+          <td>15%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior5_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td>የአፈፃፀም ግብረ መልስ በወቅቱና በአግባቡ የመስጠትና የመቀበል ዝንባሌ</td>
+          <td>10%</td>
+          <td>
+            <input
+              type="number"
+              step="0.01"
+              min="1"
+              max="4"
+              class="form-control behavior-select"
+              name="behavior6_score"
+              required
+            />
+          </td>
+          <td class="multiplied-value"></td>
+        </tr>
+        <tr>
+          <td style="border: none"></td>
+          <td style="border: none"></td>
+          <td>Total</td>
+          <td id="avg-value"></td>
+        </tr>
+        <tr>
+          <td style="border: none"></td>
+          <td style="border: none"></td>
+          <td>Average Value</td>
+          <td id="total-value"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="submit-container">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="mb-5"></div>
+<div class="m-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Evaluator</th>
+        <th>Employee</th>
+        <th>Evaluation date</th>
+        <th>result</th>
+        <th>Edit/Delete</th>
+      </tr>
+    </thead>
+    <tbody id="activity-list">
+      {% for eval in evaluations %}
+      <tr>
+        <td>{{eval.evaluator.first_name}} {{eval.evaluator.last_name}}</td>
+        <td>{{eval.employee.first_name}} {{eval.employee.last_name}}</td>
+        <td>{{eval.evaluation_date}}</td>
+        <td>{{eval.result}}</td>
+        <td>
+          <form class="d-inline" action="" method="post">
+            <button
+              type="submit"
+              class="btn btn-info btn-sm btn-custom"
+              style="border-radius: 25px; width: 60px"
+            >
+              edit
+            </button>
+          </form>
+          <form
+            id="delete-subactivity"
+            class="d-inline"
+            action=""
+            method="put"
+          >
+            <button
+              type="submit"
+              class="btn btn-danger btn-sm btn-custom"
+              style="border-radius: 25px; width: 60px"
+            >
+              delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %} {% if evaluations is None %}
+      <tr id="no-activities-message">
+        <td colspan="3">No evaluations added.</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+<div class="mb-5"></div>
+{% endblock %}
