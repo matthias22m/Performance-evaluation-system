@@ -8,8 +8,11 @@ def position_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated:
-            # Get the user's position and check if it's not None
-            user_position = request.user.led_unit
+            try:
+                user_position = request.user.led_unit
+            except:
+                return HttpResponseForbidden("You do not have permission to access this resource.")
+
             if user_position is not None:
                 return view_func(request, *args, **kwargs)
             return HttpResponseForbidden("You do not have permission to access this resource.")
