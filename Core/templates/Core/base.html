@@ -44,6 +44,13 @@
           </li>
           <li class="link">
             <a
+              href="{% url 'all_plans' %}"
+              class="{% if request.resolver_match.url_name == 'all_plans' %}active{% endif %}"
+              >Plans</a
+            >
+          </li>
+          <li class="link">
+            <a
               href="{% url 'subactivity' %}"
               class="{% if request.resolver_match.url_name == 'subactivity' %}active{% endif %}"
               >Activities</a

@@ -8,27 +8,51 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .decorators import position_required
 from Users.views import EmployeeView
+from Users.models import Group
 
 @login_required
 def home(request):
     if request.user.unit == None:
         return EmployeeView(request)
+    annual_plan = request.user.unit.plans.first().annual_plans.first()
+    casual_plan = request.user.unit.plans.first().casual_plans.first()
+    
     employee = request.user
     employees = request.user.unit.employees.exclude(email__in=[request.user.email]).order_by('first_name','last_name')[:2]
-    context = {'employee':employee, 'employees':employees}
+    context = {'employee':employee, 'employees':employees, 'annual_plan':annual_plan,'casual_plan':casual_plan}
     
     return render(request,'core/home.html',context)
 
+@position_required
 def groups(request):
-    return render(request, 'core/groups.html')
+    groups = request.user.unit.groups.all()
+    employees = request.user.unit.employees.exclude(email__in=[request.user.email])
+    if request.method == 'POST':
+        employee = request.POST.getlist('employees[]')
+        group_name = request.POST.get('group_name')
+        unit = request.user.unit
+        
+        group = Group.objects.create(
+            unit=unit,
+            name=group_name
+        )
+        group.employee.set(employee)
+        group.save()
+        
+        return redirect('groups')
+
+
+    context = {'groups':groups,'employees':employees}
+    return render(request, 'core/groups.html', context)
+
+@position_required
 def all_plans(request):
-    return render(request, 'core/plan.html')
-
-def all_employees(request):
-    return render(request, 'core/all-employ.html') 
-def add_employee(request):
-    return render(request, 'core/add_emp.html')
-
+    annual_plans = request.user.unit.plans.first().annual_plans.all()
+    casual_plans = request.user.unit.plans.first().casual_plans.all()
+    
+    context = {'annual_plans':annual_plans,'casual_plans':casual_plans}
+    
+    return render(request, 'core/plan.html',context)
 
 Employee = get_user_model()
 
