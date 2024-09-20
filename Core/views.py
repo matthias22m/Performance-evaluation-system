@@ -7,55 +7,18 @@ from django import forms
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from .decorators import position_required
+from Users.views import EmployeeView
 
-# def activity_list(request):
-#     activities = Activity.objects.all()
-#     return render(request, 'your_template.html', {'activities': activities})
-
-# class ActivityForm(forms.ModelForm):
-#     class Meta:
-#         model = Activity
-#         fields = ('name', 'deadline', 'description')
-
-# @require_POST
-# def add_activity(request):
-#     activity_name = request.POST.get('activity_name')
-#     description = request.POST.get('description')
-#     deadline = request.POST.get('deadline')
-#     assigned_person = request.POST.get('assign_person')
-
-   # Activity.objects.create(
-    #    name=activity_name,
-    #    description=description,
-     #   deadline=deadline,
-     #   assigned_person=assigned_person
-   # )
-    #return redirect('activity_list')
+@login_required
 def home(request):
-    return render(request,'core/home.html')
-#     Activity.objects.create(
-#         name=activity_name,
-#         description=description,
-#         deadline=deadline,
-#         assigned_person=assigned_person
-#     )
-#     return redirect('activity_list')
+    if request.user.unit == None:
+        return EmployeeView(request)
+    employee = request.user
+    employees = request.user.unit.employees.exclude(email__in=[request.user.email]).order_by('first_name','last_name')[:2]
+    context = {'employee':employee, 'employees':employees}
+    
+    return render(request,'core/home.html',context)
 
-# def activities_list(request):
-#     activities = Activity.objects.all()
-#     return render(request, 'activities/list.html', {'activities': activities})
-
-def activities(request):
-    return render(request, 'core/activities.html')
-
-def employee(request):
-    return render(request, 'core/employee.html')
-
-
-def logout_view(request):
-    return render(request, 'core/logout.html')
-def employee(request):
-    return render(request, 'core/employee.html')
 def groups(request):
     return render(request, 'core/groups.html')
 def all_plans(request):

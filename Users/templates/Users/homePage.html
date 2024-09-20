@@ -20,7 +20,11 @@
         <li class="EmployeeViewBar">
           <img src="{{employee_image.image.url}}" class="navbarprofile" />
         </li>
-        <li class="EmployeeViewBar"><a href="#" class="btn">Logout</a></li>
+        <form class="EmployeeViewBar" action="{% url 'logout' %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-danger" type="submmit" class="logout">Logout</button>
+        </form>
+        {% comment %} <li class="EmployeeViewBar"><a href="{% url 'logout' %}" class="btn">Logout</a></li> {% endcomment %}
         <li class="humburgerMenu" onclick="showitems()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +39,7 @@
           </svg>
         </li>
       </ul>
-      <ul class="navbar" id="navbar">
+      {% comment %} <ul class="navbar" id="navbar">
         <li onclick="hideItmes()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +66,7 @@
         <li onclick="hideItmes()"><a href="#">Activities</a></li>
         <li onclick="hideItmes()"><a href="#">Evaluation</a></li>
         <li onclick="hideItmes()"><a href="#" class="btn">Logout</a></li>
-      </ul>
+      </ul> {% endcomment %}
     </nav>
     <main>
       <div class="profile">
@@ -77,11 +81,7 @@
           <div id="profile-info">
             <p><strong>Email: </strong>{{target_employee.email }}</p>
             <p><strong>Phone: </strong>{{target_employee.phone_number}}</p>
-            {% if target_employee.position is not None %}
-            <p><strong>Position: </strong> Unit Leader</p>
-            {% else %}
-            <p><strong>Position: </strong> Unit Leader</p>
-            {% endif %}
+            <p><strong>Position: </strong> Employee</p>
           </div>
         </div>
       </div>
