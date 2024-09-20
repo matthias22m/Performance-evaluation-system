@@ -14,10 +14,12 @@ def handle_unit_leader_change(sender, instance, **kwargs):
         old_unit = Unit.objects.get(pk=instance.pk)
         if old_unit.unit_leader and old_unit.unit_leader != instance.unit_leader:
             old_unit.unit_leader.position = None
+            old_unit.unit_leader.unit = None
             old_unit.unit_leader.save()
 
         if instance.unit_leader and old_unit.unit_leader != instance.unit_leader:
             instance.unit_leader.position = instance.position_id
+            instance.unit_leader.unit = instance
             instance.unit_leader.save()
 
 @receiver(post_save, sender=WorkUnit)
