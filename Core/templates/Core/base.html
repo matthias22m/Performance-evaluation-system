@@ -57,8 +57,9 @@
             >
           </li>
         </ul>
-
-        <img src="{% static 'core/profile.png' %}" alt="profile" />
+        {% if request.resolver_match.url_name != 'home' %}
+        <img class="rounded-circle" src="{{request.user.profile.image.url}}" alt="profile" height="50px" />
+        {% endif %}
         <form action="{% url 'logout' %}" method="POST">
           {% csrf_token %}
           <button type="submmit" class="logout">Logout</button>

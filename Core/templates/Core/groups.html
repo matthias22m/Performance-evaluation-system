@@ -1,92 +1,92 @@
+{% extends "Core/base.html" %} 
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groups</title>
+
+{% block title %} PMS - home {% endblock %} 
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'core/grpstyle.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+{% endblock %}
 
-<body>
-    {% include 'core/navbar.html' %}
-    <div class="container mt-5">
-        <h2 class="form-title">Group Management:</h2>
-        <hr>
-        <div class="centered-form">
-            <form method="post" action="">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="group-name">Group</label>
-                    <input type="text" id="group-name" name="group_name" class="form-control" placeholder="Group Name.....">
-                </div>
-                <div class="form-group">
-                    <label for="employee-select">Add Member</label>
-                    <select id="employee-select" name="member" class="form-control">
-                        <option>Select Employee.....</option>
-                        <option>Fenet</option>
-                        <option>Fen</option>
-                     
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
-            </form>
-        </div>
 
-        <h3>List of Groups:</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Group Name</th>
-                    <th>Members</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="group-list">
-                <!-- Render existing groups from the backend -->
-                {% for group in groups %}
-                <tr>
-                    <td>{{ group.name }}</td>
-                    <td>{{ group.members|join:", " }}</td>
-                    <td class="group-actions">
-                        <button class="btn btn-danger btn-sm delete-btn" data-group-id="{{ group.id }}">Delete</button>
-                        <button class="btn btn-primary btn-sm edit-btn" data-group-id="{{ group.id }}">Edit</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% block extra_script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const createBtn = document.getElementById('create-btn');
+        const groupList = document.getElementById('group-list');
+
+        createBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const form = e.target.closest('form');
+            const groupName = document.getElementById('group-name').value.trim();
+            const selectedMember = document.getElementById('employee-select').value;
+
+            if (groupName && selectedMember !== 'Select Employee.....') {
+                form.submit();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        groupList.addEventListener('click', function (e) {
+            if (e.target.classList.contains('delete-btn')) {
+                const groupId = e.target.getAttribute('data-group-id');
+                if (confirm('Are you sure you want to delete this group?')) {
+                }
+            } else if (e.target.classList.contains('edit-btn')) {
+                const groupId = e.target.getAttribute('data-group-id');
+            }
+        });
+    });
+</script>
+{% endblock extra_script %}
+    
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="form-title">Group Management:</h2>
+    <hr>
+    <div class="centered-form">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="group-name">Group</label>
+                <input type="text" id="group-name" name="group_name" class="form-control" placeholder="Group Name.....">
+            </div>
+            <div class="form-group">
+                <label for="employee-select">Add Member</label>
+                <select id="employee-select" name="member" class="form-control">
+                    <option>Select Employee.....</option>
+                    <option>Fenet</option>
+                    <option>Fen</option>
+                 
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="create-btn" style="width: 78px;">Create</button>
+        </form>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const createBtn = document.getElementById('create-btn');
-            const groupList = document.getElementById('group-list');
-
-            createBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                const form = e.target.closest('form');
-                const groupName = document.getElementById('group-name').value.trim();
-                const selectedMember = document.getElementById('employee-select').value;
-
-                if (groupName && selectedMember !== 'Select Employee.....') {
-                    form.submit();
-                } else {
-                    alert('Please fill in all fields.');
-                }
-            });
-
-            groupList.addEventListener('click', function (e) {
-                if (e.target.classList.contains('delete-btn')) {
-                    const groupId = e.target.getAttribute('data-group-id');
-                    if (confirm('Are you sure you want to delete this group?')) {
-                    }
-                } else if (e.target.classList.contains('edit-btn')) {
-                    const groupId = e.target.getAttribute('data-group-id');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <h3>List of Groups:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Group Name</th>
+                <th>Members</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="group-list">
+            <!-- Render existing groups from the backend -->
+            {% for group in groups %}
+            <tr>
+                <td>{{ group.name }}</td>
+                <td>{{ group.members|join:", " }}</td>
+                <td class="group-actions">
+                    <button class="btn btn-danger btn-sm delete-btn" data-group-id="{{ group.id }}">Delete</button>
+                    <button class="btn btn-primary btn-sm edit-btn" data-group-id="{{ group.id }}">Edit</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
+ 

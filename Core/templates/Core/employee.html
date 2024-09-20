@@ -1,57 +1,61 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .container .btn {
-            border-radius: 50px;
-        }
-        .container .form-control{
-            border-radius: 40px;
-        }
-    </style>
-</head>
-<body>
-    {% include 'core/navbar.html' %}
-    
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
-            <h1 class="mb-0">Employee Management</h1>
-            <input type="text" name="search" class="form-control" style="width: 250px;" placeholder="Search employees..." required>
-        </div>
-        <hr class="mb-5">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Job Tilte</th>
-                    <th>Gender</th>
-                    <th>Edit/Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for emp in employees %}
-                <tr>
-                    <td>{{emp.first_name}} {{emp.last_name}}</td>
-                    <td>{{emp.phone_number}}</td>
-                    <td>{{emp.email}}</td>
-                    <td>{{emp.job_title}}</td>
-                    <td>{{emp.gender}}</td>
-                    <td>
-                        <button class="btn btn-primary">Profile</button>
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'add_employee' %}" class="btn btn-primary">Add New Employee</a>
-    </div>
-</body>
-</html>
+{% extends "Core/base.html" %} 
+{% load static %} 
+{% block title %} PMS - employee management {%endblock %} 
+
+{% block extra_css %}
+<style>
+  .container .btn {
+    border-radius: 50px;
+  }
+  .container .form-control {
+    border-radius: 40px;
+  }
+</style>
+{% endblock %} 
+
+{% block content %}
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+    <h1 class="mb-0">Employee Management</h1>
+    <input
+      type="text"
+      name="search"
+      class="form-control"
+      style="width: 250px"
+      placeholder="Search employees..."
+      required
+    />
+  </div>
+  <hr class="mb-5" />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Job Tilte</th>
+        <th>Gender</th>
+        <th>Edit/Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for emp in employees %}
+      <tr>
+        <td>{{emp.first_name}} {{emp.last_name}}</td>
+        <td>{{emp.phone_number}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.job_title}}</td>
+        <td>{{emp.gender}}</td>
+        <td>
+          <button class="btn btn-primary">Profile</button>
+          <button class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'add_employee' %}" class="btn btn-primary"
+    >Add New Employee</a
+  >
+</div>
+{% endblock %}
